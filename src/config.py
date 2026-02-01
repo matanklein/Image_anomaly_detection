@@ -1,9 +1,7 @@
 # Directory structure
-# PCAP_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
-PCAP_PATH = r'C:\Users\USER\Desktop\CNN_anomaly_detection\Image_anomaly_detection\test\test.pcapng'
+PCAP_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
 MODEL_DIR = '../output/cic2018/semi-supervised/model.pth'
-# TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
-TENSORS_DIR = r'C:\Users\USER\Desktop\CNN_anomaly_detection\Image_anomaly_detection\test'
+TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
 
 # Subfolders
 TRAIN_BENIGN_DIR = f'{TENSORS_DIR}/train/benign'
