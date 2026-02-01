@@ -4,7 +4,7 @@ import numpy as np
 import torch.nn.functional as F
 
 class FlowPicCNN(nn.Module):
-    def __init__(self, input_dim=1500, num_classes=1, dropout_rate=0.5):
+    def __init__(self, input_dim=1500, num_classes=2, dropout_rate=0.5):
         super(FlowPicCNN, self).__init__()
         
         # Layer 1: Conv 10 filters, kernel 10, stride 5
