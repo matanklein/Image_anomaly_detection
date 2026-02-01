@@ -3,79 +3,105 @@ ATTACKS = [
         "name": "bruteforceWeb1",
         "pcap": "../data/cic2018/bruteforce-web-1-22_02_2018.pcap",
         "attacker_ip": ["18.218.115.60"],
-        "victim_ip": ["172.31.69.28"]
+        "victim_ip": ["172.31.69.28"],
+        "start_time": 1519294620,
+        "end_time": 1519298640
     },
     {
         "name": "bruteforceWeb2",
         "pcap": "../data/cic2018/bruteforce-web-2-23_02_2018.pcap",
         "attacker_ip": ["18.218.115.60"],
-        "victim_ip": ["172.31.69.28"]
+        "victim_ip": ["172.31.69.28"],
+        "start_time": 1519380180,
+        "end_time": 1519383780
     },
     {
         "name": "bruteforceXSS1",
         "pcap": "../data/cic2018/bruteforce-xss-1-22_02_2018.pcap",
         "attacker_ip": ["18.218.115.60"],
-        "victim_ip": ["172.31.69.28"]
+        "victim_ip": ["172.31.69.28"],
+        "start_time": 1519307400,
+        "end_time": 1519309740
     },
     {
         "name": "bruteforceXSS2",
         "pcap": "../data/cic2018/bruteforce-xss-2-23_02_2018.pcap",
         "attacker_ip": ["18.218.115.60"],
-        "victim_ip": ["172.31.69.28"]
+        "victim_ip": ["172.31.69.28"],
+        "start_time": 1519390800,
+        "end_time": 1519395000
     },
     {
         "name": "sqlInjection1",
         "pcap": "../data/cic2018/sql-injection-1-22_02_2018.pcap",
         "attacker_ip": ["172.16.0.5"],
-        "victim_ip": ["172.16.0.2"]
+        "victim_ip": ["172.16.0.2"],
+        "start_time": 1519316100,
+        "end_time": 1519316940
     },
     {
         "name": "sqlInjection2",
         "pcap": "../data/cic2018/sql-injection-2-23_02_2018.pcap",
         "attacker_ip": ["172.16.0.5"],
-        "victim_ip": ["172.16.0.2"]
+        "victim_ip": ["172.16.0.2"],
+        "start_time": 1519398300,
+        "end_time": 1519399080
     },
     {
         "name": "Infiltration1",
         "pcap": "../data/cic2018/Infiltration1_28_02_2018.pcap",
         "attacker_ip": ["13.58.225.34"],
-        "victim_ip": ["172.31.69.24"]
+        "victim_ip": ["172.31.69.24"],
+        "start_time": 1519815000,
+        "end_time": 1519819500
     },
     {
         "name": "Infiltration2",
         "pcap": "../data/cic2018/Infiltration2_28_02_2018.pcap",
         "attacker_ip": ["13.58.225.34"],
-        "victim_ip": ["172.31.69.24"]
+        "victim_ip": ["172.31.69.24"],
+        "start_time": 1519825320,
+        "end_time": 1519828800
     },
     {
         "name": "Infiltration3",
         "pcap": "../data/cic2018/Infiltration3-01_03_2018.pcap",
         "attacker_ip": ["13.58.225.34"],
-        "victim_ip": ["172.31.69.13"]
+        "victim_ip": ["172.31.69.13"],
+        "start_time": 1519898220,
+        "end_time": 1519901700
     },
     {
         "name": "Infiltration4",
         "pcap": "../data/cic2018/Infiltration4-01_03_2018.pcap",
         "attacker_ip": ["13.58.225.34"],
-        "victim_ip": ["172.31.69.13"]
+        "victim_ip": ["172.31.69.13"],
+        "start_time": 1519912800,
+        "end_time": 1519918620
     },
     {
         "name": "ftpBruteforce",
         "pcap": "../data/cic2018/ftp-bruteforce-14_2_2018.pcap",
         "attacker_ip": ["18.221.219.4"],
-        "victim_ip": ["172.31.69.25"]
+        "victim_ip": ["172.31.69.25"],
+        "start_time": 1518604320,
+        "end_time": 1518610140
     },
     {
         "name": "sshBruteforce",
         "pcap": "../data/cic2018/ssh-bruteforce-14_2_2018.pcap",
         "attacker_ip": ["13.58.98.64"],
-        "victim_ip": ["172.31.69.25"]
+        "victim_ip": ["172.31.69.25"],
+        "start_time": 1518616860,
+        "end_time": 1518622260
     },
     {
         "name": "dosSlowHttpTest",
         "pcap": "../data/cic2018/dos-slowhttptest-16_2_2018.pcap",
         "attacker_ip": ["13.59.126.31"],
-        "victim_ip": ["172.31.69.25"]
+        "victim_ip": ["172.31.69.25"],
+        "start_time": 1518775920,
+        "end_time": 1518779280
     },
     {
         "name": "benign",
