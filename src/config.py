@@ -29,9 +29,9 @@ CLIP_SUMMED_COUNTS = True # Set to True to cap pixel values at 255, False to kee
 # DROPOUT_RATE = 0.5
 
 # --- Training Hyperparameters ---
-BATCH_SIZE = 16
+BATCH_SIZE = 128
 LEARNING_RATE = 0.001
-EPOCHS = 10
+EPOCHS = 20
 
 # Energy-Based OOD Settings (Liu et al. 2020)
 T = 1.0
