@@ -69,20 +69,6 @@ def get_flowpic(timetofirst, pkts_size, flowpic_dim=1500, max_block_duration=60)
     
     return mtx
 
-def ensure_directories():
-    """Create the output directory structure if it doesn't exist."""
-    # We will save everything to a generic 'processed' folder based on the config logic
-    # Adjusting based on config: The user wants to save specific tensors.
-    # For this script, we need a general output folder or specific train/test logic.
-    # I will create a generic one based on the PCAP name for safety.
-    
-    base_name = os.path.basename(config.PCAP_PATH).replace('.pcap', '')
-    output_dir = os.path.join(config.TENSORS_DIR, "raw_processed", base_name)
-    
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-    return output_dir
-
 def get_5tuple(pkt):
     """Extracts src_ip, dst_ip, src_port, dst_port, proto."""
     try:
@@ -105,25 +91,23 @@ def get_5tuple(pkt):
     except IndexError:
         return None
 
-def process_pcap_to_summed_images():
+def process_pcap_to_summed_images(mode='train'):
     print(f"--- Processing {config.PCAP_PATH} ---")
-    output_dir = ensure_directories()
     
     # State variables
-    current_window_start = -1
+    current_interval_start = -1
     
     # Dictionary to store flow data: key=5tuple, val=[(ts, size), ...]
     # We store tuples to minimize object overhead compared to storing scapy packets
     active_flows = defaultdict(list)
-    
-    # Set to track IPs seen in the current window for labeling
-    window_ips = set()
     
     # Reader
     reader = PcapReader(config.PCAP_PATH)
     
     # Progress bar (approximate since we don't know total packets in stream)
     pbar = tqdm(desc="Processing Packets", unit="pkt")
+
+    label = False  # Default label for the current interval
     
     try:
         for pkt in reader:
@@ -135,45 +119,44 @@ def process_pcap_to_summed_images():
             size = len(pkt)
             
             # Initialize start time
-            if current_window_start == -1:
-                current_window_start = ts
+            if current_interval_start == -1:
+                current_interval_start = ts
 
-            # --- CHECK TIME WINDOW ---
-            if ts >= current_window_start + config.FLOWPIC_TIME_INTERVAL:
+            # --- CHECK TIME INTERVAL ---
+            if ts >= current_interval_start + config.FLOWPIC_TIME_INTERVAL:
                 
-                # 1. PROCESS PREVIOUS WINDOW
-                save_window(active_flows, window_ips, current_window_start, output_dir)
+                # PROCESS PREVIOUS INTERVAL
+                save_interval(active_flows, current_interval_start, label, mode = mode)
                 
-                # 2. FLUSH / RESET FOR NEXT WINDOW
-                # Calculate new start time (handle gaps in traffic if necessary)
-                while ts >= current_window_start + config.FLOWPIC_TIME_INTERVAL:
-                    current_window_start += config.FLOWPIC_TIME_INTERVAL
+                # FLUSH / RESET FOR NEXT INTERVAL
+                current_interval_start += config.FLOWPIC_TIME_INTERVAL
+                label = False
                 
                 active_flows.clear()
-                window_ips.clear()
 
             # --- ACCUMULATE PACKET ---
             five_tuple = get_5tuple(pkt)
             if five_tuple:
                 # Add to flow data
                 active_flows[five_tuple].append((ts, size))
-                
-                # Add IPs to tracking set
-                window_ips.add(five_tuple[0]) # src_ip
-                window_ips.add(five_tuple[1]) # dst_ip
 
-        # Save the very last window if it has data
+                if label == False:
+                    if (five_tuple[0] in config.ATTACKER_IP) and (five_tuple[1] in config.VICTIM_IP):
+                        label = True
+                    elif (five_tuple[0] in config.VICTIM_IP) and (five_tuple[1] in config.ATTACKER_IP):
+                        label = True
+
+        # Save the very last interval if it has data
         if active_flows:
-            save_window(active_flows, window_ips, current_window_start, output_dir)
+            save_interval(active_flows, current_interval_start, label, mode = mode)
 
     except KeyboardInterrupt:
         print("\nStopping...")
     finally:
         reader.close()
         pbar.close()
-        print(f"\nProcessing complete. Files saved to {output_dir}")
 
-def save_window(active_flows, window_ips, window_start_ts, output_dir):
+def save_interval(active_flows, interval_start_ts, label, mode):
     """
     Generates FlowPics for all flows, sums them, determines label, and saves.
     """
@@ -211,10 +194,6 @@ def save_window(active_flows, window_ips, window_start_ts, output_dir):
             if hasattr(flowpic, 'numpy'):
                 flowpic = flowpic.numpy()
             
-            # Remove channel dimension if present (e.g. 1, 1500, 1500 -> 1500, 1500)
-            if flowpic.ndim == 3:
-                flowpic = flowpic.squeeze(0)
-            
             # --- SUMMATION ---
             # Add to the grand total picture
             summed_image += flowpic
@@ -230,16 +209,11 @@ def save_window(active_flows, window_ips, window_start_ts, output_dir):
     if config.CLIP_SUMMED_COUNTS:
         summed_image = np.clip(summed_image, 0, 255)
 
-    # --- LABELING LOGIC ---
-    # Check if ANY attacker IP was present in this time window
-    # Intersection between Window IPs and Config Attacker IPs
-    is_malicious = not window_ips.isdisjoint(set(config.ATTACKER_IP))
-    
-    label = config.MALICIOUS_LABEL if is_malicious else config.BENIGN_LABEL
+    output_dir = get_output_dir(mode, label)
 
     # --- SAVING ---
     # Format: {ts}_{label}.npy
-    filename = f"{int(window_start_ts)}_{label}.npy"
+    filename = f"{int(interval_start_ts)}_{label}.npy"
     save_path = os.path.join(output_dir, filename)
     
     if config.CLIP_SUMMED_COUNTS:
@@ -248,5 +222,18 @@ def save_window(active_flows, window_ips, window_start_ts, output_dir):
     else:
         np.save(save_path, summed_image)
 
-if __name__ == "__main__":
-    process_pcap_to_summed_images()
+def get_output_dir(mode, label):
+    if mode == 'train':
+        if label:
+            return config.TRAIN_OE_DIR
+        else:
+            return config.TRAIN_BENIGN_DIR
+    
+    elif mode == 'test':
+        if label:
+            return config.TEST_MALICIOUS_DIR
+        else:
+            return config.TEST_BENIGN_DIR
+        
+    else:
+        raise ValueError(f"Unknown mode: {mode}")
