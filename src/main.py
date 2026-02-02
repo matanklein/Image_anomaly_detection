@@ -1,6 +1,6 @@
 import os
 import argparse
-from preprocess import process_flows
+from preprocess import process_pcap_to_summed_images
 from train import train_model
 from test import test_model 
 import config
@@ -40,7 +40,7 @@ def run_single_attack(attack, args):
     if args.preprocess:
         print(f"   [1/2] Processing PCAP...")
         try:
-            process_flows(mode='test') 
+            process_pcap_to_summed_images(mode='test') 
         except Exception as e:
             print(f"Error in processing: {e}")
             return # Stop if preprocessing fails
@@ -118,7 +118,7 @@ def main(args):
 
     if args.preprocess and args.train:
         print("Step 2: Processing flows and converting to image tensors...")
-        process_flows('train')
+        process_pcap_to_summed_images('train')
         
         print("Step 3: Training model on benign traffic...")
         train_model()
@@ -126,7 +126,7 @@ def main(args):
 
     elif args.preprocess and args.test:
         print("Step 2: Processing flows and converting to image tensors...")
-        process_flows('test')
+        process_pcap_to_summed_images('test')
 
         print("Step 3: Testing model on mixed traffic...")
         test_model()
