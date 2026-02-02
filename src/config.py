@@ -10,7 +10,6 @@ TEST_BENIGN_DIR = f'{TENSORS_DIR}/test/bruteforceXSS1/benign' # CHANGE
 TEST_MALICIOUS_DIR = f'{TENSORS_DIR}/test/bruteforceXSS1/malicious' # CHANGE
 
 # Settings
-TIME_WINDOW = 60*60 # Time window for calulating OE (seconds)
 
 # --- FlowPic Configuration ---
 MAX_PACKET_SIZE = 1500  # Maximum packet size to consider (bytes)
