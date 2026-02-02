@@ -104,6 +104,3 @@ def test_model():
     # Evaluation
     # Using the OOD_THRESHOLD from config to calculate binary metrics
     evaluate_model(true_labels, energy_scores, config.OOD_THRESHOLD)
-
-if __name__ == "__main__":
-    test_model()
