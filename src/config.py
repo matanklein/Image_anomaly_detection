@@ -1,7 +1,7 @@
 # Directory structure
 PCAP_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
-MODEL_DIR = '../output/cic2018/semi-supervised/model.pth'
 TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
+MODEL_DIR = f'{TENSORS_DIR}/model.pth'
 
 # Subfolders
 TRAIN_BENIGN_DIR = f'{TENSORS_DIR}/train/benign'
@@ -22,10 +22,10 @@ IMAGE_AGGREGATION = 'summed' # 'summed' is summing FlowPics in the time window
 CLIP_SUMMED_COUNTS = True # Set to True to cap pixel values at 255, False to keep raw counts
 
 # # --- Model Configuration ---
-# MODEL_NAME = "LeNet5Flowpic_OE"
-# INPUT_CHANNELS = 1 # Grayscale
-# NUM_CLASSES = 2    # 0: Benign, 1: Malicious (used for OE training)
-# DROPOUT_RATE = 0.5
+MODEL_NAME = "LeNet5Flowpic_OE"
+INPUT_CHANNELS = 1 # Grayscale
+NUM_CLASSES = 2    # 0: Benign, 1: Malicious (used for OE training)
+DROPOUT_RATE = 0.5
 
 # --- Training Hyperparameters ---
 BATCH_SIZE = 128
