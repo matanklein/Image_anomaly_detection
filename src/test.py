@@ -88,7 +88,7 @@ def test_model():
             images = images.to(device).float()
             
             # Forward pass (Get Logits)
-            logits = model(images)
+            logits, _ = model(images)
             
             # Calculate Energy
             # Note: We do NOT apply Softmax here. Energy is calculated on raw logits.

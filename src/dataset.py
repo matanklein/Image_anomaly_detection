@@ -17,6 +17,10 @@ class TrafficImageDataset(Dataset):
         path = os.path.join(self.tensor_dir, self.files[idx])
         img = np.load(path).astype(np.float32) / 255.0   # Normalize to [0, 1]
         img = (img - 0.5) / 0.5  # Normalize to [-1, 1]
-        img = torch.tensor(img).permute(2, 0, 1)         # (3, H, W)
+        img = torch.tensor(img)
+        if img.dim() == 2:
+            img = img.unsqueeze(0)  # (1, H, W)
+        else:
+            img = img.permute(2, 0, 1)  # (C, H, W)
         label = torch.tensor(self.label, dtype=torch.long)
         return img, label

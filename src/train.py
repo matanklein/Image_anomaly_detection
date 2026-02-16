@@ -7,6 +7,7 @@ from tqdm import tqdm
 
 import config as Config
 from dataset import TrafficImageDataset 
+from cnn_model import FlowPicCNN
 
 def outlier_exposure_loss(logits_in, logits_out):
     """
@@ -36,11 +37,12 @@ def outlier_exposure_loss(logits_in, logits_out):
     
     return loss_ce + Config.OE_LAMBDA * loss_oe
 
-def train_model(model, device):
+def train_model():
     """
     Trains the model using Outlier Exposure.
     Data loading is handled internally to match CNN_anomaly_detection architecture.
     """
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"--- Preparing Data for Training on {device} ---")
 
     # Initialize Datasets
@@ -62,6 +64,7 @@ def train_model(model, device):
     train_loader = DataLoader(full_dataset, batch_size=Config.BATCH_SIZE, shuffle=True)
     
     # Optimizer
+    model = FlowPicCNN(input_dim=Config.FLOWPIC_DIM, num_classes=2)
     model.train()
     optimizer = optim.Adam(model.parameters(), lr=Config.LEARNING_RATE)
     criterion = nn.CrossEntropyLoss() # Fallback for pure batches
@@ -82,7 +85,7 @@ def train_model(model, device):
             optimizer.zero_grad()
             
             # Forward Pass (Returns Logits)
-            logits = model(images)
+            logits, _ = model(images)
             
             # --- OE Logic Adaptation ---
             # Separate the batch based on labels
@@ -127,11 +130,11 @@ def train_model(model, device):
             
     # Save Model
     # Ensure directory exists
-    Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
+    # Config.MODELS_DIR.mkdir(parents=True, exist_ok=True)
     
     # Construct save path using Config variables
-    save_path = Config.MODELS_DIR / "model.pth" # Or match config.MODEL_DIR if defined directly
-    torch.save(model.state_dict(), save_path)
-    print(f"Model saved to {save_path}")
+    # save_path = Config.MODELS_DIR / "model.pth" # Or match config.MODEL_DIR if defined directly
+    torch.save(model.state_dict(), Config.MODEL_DIR)
+    print(f"Model saved to {Config.MODEL_DIR}")
     
     return model

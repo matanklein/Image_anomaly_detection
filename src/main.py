@@ -149,7 +149,7 @@ if __name__ == "__main__":
     parser.add_argument('--test', action='store_true', help="Test model on mixed traffic")
 
     parser.add_argument('--benchmark', action='store_true', help="Run ALL attacks defined in BATCH_ATTACKS list")
-    parser.add_argument('--dataset', type=str, default='cic-2018', help="Name of the dataset (e.g., ton-iot, cic-ids-2018, cic-mal-anal).")
+    parser.add_argument('--dataset', type=str, default='cic-ids-2018', help="Name of the dataset (e.g., ton-iot, cic-ids-2018, cic-mal-anal).")
     
     args = parser.parse_args()
     main(args)
