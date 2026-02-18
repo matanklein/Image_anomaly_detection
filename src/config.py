@@ -15,11 +15,11 @@ TEST_MALICIOUS_DIR = f'{TENSORS_DIR}/test/bruteforceXSS1/malicious' # CHANGE
 MAX_PACKET_SIZE = 1500  # Maximum packet size to consider (bytes)
 FLOWPIC_DIM = 1500
 FLOWPIC_TIME_INTERVAL = 60  # time interval which each FlowPic represents (seconds) 
-IMAGE_TYPE = 'binary' # 'binary' is taking > 0 as 1. Others: 'normal'
+IMAGE_TYPE = 'binary' # 'binary' is taking > 0 as 1 when creating FlowPic. Others: 'normal'
 
 # --- Aggregation Configuration ---
 IMAGE_AGGREGATION = 'summed' # 'summed' is summing FlowPics in the time window
-CLIP_SUMMED_COUNTS = True # Set to True to cap pixel values at 255, False to keep raw counts
+CLIP_SUMMED_COUNTS = False # Set to True to cap pixel values at 255, False to keep raw counts
 
 # # --- Model Configuration ---
 MODEL_NAME = "LeNet5Flowpic_OE"
