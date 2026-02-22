@@ -1,5 +1,5 @@
 # Directory structure
-PCAP_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
+SOURCE_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
 TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
 MODEL_DIR = f'{TENSORS_DIR}/model.pth'
 

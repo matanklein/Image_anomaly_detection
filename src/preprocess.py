@@ -1,4 +1,5 @@
 import os
+import csv
 import numpy as np
 from scapy.all import IP, TCP, UDP
 from scapy.utils import PcapReader
@@ -25,9 +26,6 @@ def get_flowpic(timetofirst, pkts_size, flowpic_dim=1500, max_block_duration=60)
         max_block_duration (int, optional): The maximum time window (in seconds) 
                                             to consider. Packets arriving after 
                                             this are discarded. Defaults to 60.
-    Returns:
-        np.ndarray: A 2D numpy array of shape (flowpic_dim, flowpic_dim) with 
-                    dtype uint8. Values are clipped to [0, 255].
     """
     # Filter: Ignore packets that arrived after the time window
     # Note: np.where returns a tuple, we take the first element [0]
@@ -62,7 +60,7 @@ def get_flowpic(timetofirst, pkts_size, flowpic_dim=1500, max_block_duration=60)
         # Convert counts to binary: >0 becomes 1
         mtx = np.where(mtx > 0, 1, 0)
 
-    elif config.IMAGE_TYPE == 'normal':
+    elif config.IMAGE_TYPE == 'limited_count':
         # Cap counts at 255 (uint8 max) to create a valid grayscale image.
         # Any bin with >255 packets will be set to exactly 255.
         mtx = np.clip(mtx, a_min=0, a_max=255).astype("uint8")
@@ -91,8 +89,8 @@ def get_5tuple(pkt):
     except IndexError:
         return None
 
-def process_pcap_to_summed_images(mode='train'):
-    print(f"--- Processing {config.PCAP_PATH} ---")
+def process_pcap_to_summed_images(pcap_path, mode='train'):
+    print(f"--- Processing {pcap_path} ---")
     
     # State variables
     current_interval_start = -1
@@ -102,7 +100,7 @@ def process_pcap_to_summed_images(mode='train'):
     active_flows = defaultdict(list)
     
     # Reader
-    reader = PcapReader(config.PCAP_PATH)
+    reader = PcapReader(pcap_path)
     
     # Progress bar (approximate since we don't know total packets in stream)
     pbar = tqdm(desc="Processing Packets", unit="pkt")
@@ -155,6 +153,107 @@ def process_pcap_to_summed_images(mode='train'):
     finally:
         reader.close()
         pbar.close()
+
+def _first_nonempty(row, keys, default=""):
+    for key in keys:
+        if key in row:
+            value = row[key]
+            if value is not None and str(value).strip() != "":
+                return value
+    return default
+
+def _safe_int(value, default=0):
+    try:
+        return int(float(str(value).strip()))
+    except (ValueError, TypeError, AttributeError):
+        return default
+
+def _safe_float(value, default=None):
+    try:
+        return float(str(value).strip())
+    except (ValueError, TypeError, AttributeError):
+        return default
+
+def get_5tuple_from_csv_row(row):
+    """Extracts src_ip, dst_ip, src_port, dst_port, proto from a CSV row."""
+    src_ip = _first_nonempty(row, ["ip.src", "src_ip", "source_ip"]).strip()
+    dst_ip = _first_nonempty(row, ["ip.dst", "dst_ip", "destination_ip"]).strip()
+
+    proto = _safe_int(_first_nonempty(row, ["ip.proto", "protocol", "proto"], default="0"), default=0)
+
+    tcp_sport = _safe_int(_first_nonempty(row, ["tcp.srcport", "tcp.sport", "srcport"], default="0"), default=0)
+    tcp_dport = _safe_int(_first_nonempty(row, ["tcp.dstport", "tcp.dport", "dstport"], default="0"), default=0)
+    udp_sport = _safe_int(_first_nonempty(row, ["udp.srcport", "udp.srcpor", "udp.sport"], default="0"), default=0)
+    udp_dport = _safe_int(_first_nonempty(row, ["udp.dstport", "udp.dstpor", "udp.dport"], default="0"), default=0)
+
+    if proto == 6:
+        src_port, dst_port = tcp_sport, tcp_dport
+    elif proto == 17:
+        src_port, dst_port = udp_sport, udp_dport
+    else:
+        src_port, dst_port = (tcp_sport or udp_sport), (tcp_dport or udp_dport)
+
+    if src_ip == "" or dst_ip == "":
+        return None
+
+    return (src_ip, dst_ip, src_port, dst_port, proto)
+
+def process_csv_to_summed_images(csv_path, mode='train'):
+    """
+    Processes packet CSV rows into interval-level summed FlowPics.
+
+    Expected columns include:
+    - ip.src, ip.dst, ip.proto, frame.len, frame.time
+    - tcp.srcport, tcp.dstport, udp.srcport, udp.dstport (when relevant)
+    """
+
+    print(f"--- Processing {csv_path} ---")
+
+    current_interval_start = -1
+    active_flows = defaultdict(list)
+    label = False
+
+    try:
+        with open(csv_path, 'r', newline='') as csv_file:
+            reader = csv.DictReader(csv_file)
+            pbar = tqdm(desc="Processing CSV Rows", unit="row")
+
+            for row in reader:
+                pbar.update(1)
+
+                ts = _safe_float(_first_nonempty(row, ["frame.time_epoch", "frame.time", "timestamp", "time"]))
+                size = _safe_int(_first_nonempty(row, ["frame.len", "length", "pkt_len", "packet_length"], default="0"), default=0)
+
+                if ts is None:
+                    continue
+
+                if current_interval_start == -1:
+                    current_interval_start = ts
+
+                if ts >= current_interval_start + config.FLOWPIC_TIME_INTERVAL:
+                    save_interval(active_flows, current_interval_start, label, mode=mode)
+
+                    current_interval_start += config.FLOWPIC_TIME_INTERVAL
+                    label = False
+                    active_flows.clear()
+
+                five_tuple = get_5tuple_from_csv_row(row)
+                if five_tuple:
+                    active_flows[five_tuple].append((ts, size))
+
+                    if label is False:
+                        if (five_tuple[0] in config.ATTACKER_IP) and (five_tuple[1] in config.VICTIM_IP):
+                            label = True
+                        elif (five_tuple[0] in config.VICTIM_IP) and (five_tuple[1] in config.ATTACKER_IP):
+                            label = True
+
+            if active_flows:
+                save_interval(active_flows, current_interval_start, label, mode=mode)
+
+            pbar.close()
+
+    except KeyboardInterrupt:
+        print("\nStopping...")
 
 def save_interval(active_flows, interval_start_ts, label, mode):
     """
@@ -237,3 +336,14 @@ def get_output_dir(mode, label):
         
     else:
         raise ValueError(f"Unknown mode: {mode}")
+
+def process_source_to_summed_images(mode='train'):
+    """
+    Main entry point to process the configured SOURCE_PATH into summed images.
+    """
+    if config.SOURCE_PATH.endswith('.pcap'):
+        process_pcap_to_summed_images(config.SOURCE_PATH, mode=mode)
+    elif config.SOURCE_PATH.endswith('.csv'):
+        process_csv_to_summed_images(config.SOURCE_PATH, mode=mode)
+    else:
+        raise ValueError(f"Unsupported file type for SOURCE_PATH: {config.SOURCE_PATH}")

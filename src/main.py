@@ -24,7 +24,7 @@ def run_single_attack(attack, args):
     print(f"\n>>> Setting up environment for: {attack_name}")
     
     # 1. DYNAMICALLY UPDATE CONFIG
-    config.PCAP_PATH = attack['pcap']
+    config.SOURCE_PATH = attack['pcap']
     config.ATTACKER_IP = attack['attacker_ip']
     config.VICTIM_IP = attack['victim_ip']
     
