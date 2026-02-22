@@ -1,8 +1,6 @@
 import os
 import argparse
-from preprocess import process_pcap_to_summed_images
-from train import train_model
-from test import test_model 
+from preprocess import process_source_to_summed_images
 import config
 
 def ensure_dirs():
@@ -40,7 +38,7 @@ def run_single_attack(attack, args):
     if args.preprocess:
         print(f"   [1/2] Processing PCAP...")
         try:
-            process_pcap_to_summed_images(mode='test') 
+            process_source_to_summed_images(mode='test') 
         except Exception as e:
             print(f"Error in processing: {e}")
             return # Stop if preprocessing fails
@@ -51,6 +49,7 @@ def run_single_attack(attack, args):
     if args.test:
         print(f"   [2/2] Running Evaluation...")
         try:
+            from test import test_model
             test_model()
         except Exception as e:
             print(f"Error in testing: {e}")
@@ -118,26 +117,34 @@ def main(args):
 
     if args.preprocess and args.train:
         print("Step 2: Processing flows and converting to image tensors...")
-        process_pcap_to_summed_images('train')
+        process_source_to_summed_images('train')
         
         print("Step 3: Training model on benign traffic...")
+        from train import train_model
         train_model()
 
 
     elif args.preprocess and args.test:
         print("Step 2: Processing flows and converting to image tensors...")
-        process_pcap_to_summed_images('test')
+        process_source_to_summed_images('test')
 
         print("Step 3: Testing model on mixed traffic...")
+        from test import test_model
         test_model()
     
     elif args.test:
         print("Step 2: Testing model on mixed traffic...")
+        from test import test_model
         test_model() 
     
     elif args.train:
         print("Step 2: Training model on benign traffic...")
+        from train import train_model
         train_model()
+
+    elif args.preprocess:
+        print("Step 2: Processing flows and converting to image tensors...")
+        process_source_to_summed_images('train')
         
     if not any([args.preprocess, args.train, args.test]):
         print("No action specified. Use --preprocess, --train, or --test.")

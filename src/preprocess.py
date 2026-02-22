@@ -1,6 +1,7 @@
 import os
 import csv
 import numpy as np
+from datetime import datetime
 from scapy.all import IP, TCP, UDP
 from scapy.utils import PcapReader
 from collections import defaultdict
@@ -174,17 +175,69 @@ def _safe_float(value, default=None):
     except (ValueError, TypeError, AttributeError):
         return default
 
+def _normalize_row_keys(row):
+    normalized = {}
+    for key, value in row.items():
+        if key is None:
+            continue
+        clean_key = str(key).replace("\ufeff", "").strip().strip('"').strip("'").lower()
+        if isinstance(value, str):
+            value = value.replace("\ufeff", "").strip().strip('"').strip("'")
+        normalized[clean_key] = value
+    return normalized
+
+def _parse_timestamp(row):
+    ts_raw = _first_nonempty(row, [
+        "frame.time_epoch",
+        "frame.time",
+        "timestamp",
+        "time",
+        "ts",
+    ])
+
+    if ts_raw is None:
+        return None
+
+    text = str(ts_raw).strip()
+    if text == "":
+        return None
+
+    # Fast path: epoch seconds string/number
+    direct = _safe_float(text)
+    if direct is not None:
+        return direct
+
+    # Handle common Wireshark timestamp strings, e.g.:
+    # "Feb 15, 2018 11:59:01.123456000 IST"
+    # "2018-02-15 11:59:01.123456"
+    try:
+        cleaned = " ".join(text.split())
+        for fmt in (
+            "%b %d, %Y %H:%M:%S.%f",
+            "%b %d, %Y %H:%M:%S",
+            "%Y-%m-%d %H:%M:%S.%f",
+            "%Y-%m-%d %H:%M:%S",
+        ):
+            try:
+                return datetime.strptime(cleaned, fmt).timestamp()
+            except ValueError:
+                continue
+    except Exception:
+        pass
+
+    return None
+
 def get_5tuple_from_csv_row(row):
     """Extracts src_ip, dst_ip, src_port, dst_port, proto from a CSV row."""
-    src_ip = _first_nonempty(row, ["ip.src", "src_ip", "source_ip"]).strip()
-    dst_ip = _first_nonempty(row, ["ip.dst", "dst_ip", "destination_ip"]).strip()
+    src_ip = _first_nonempty(row, ["ip.src", "src_ip", "source_ip", "source", "src"]).strip()
+    dst_ip = _first_nonempty(row, ["ip.dst", "dst_ip", "destination_ip", "destination", "dst"]).strip()
 
     proto = _safe_int(_first_nonempty(row, ["ip.proto", "protocol", "proto"], default="0"), default=0)
 
-    tcp_sport = _safe_int(_first_nonempty(row, ["tcp.srcport", "tcp.sport", "srcport"], default="0"), default=0)
-    tcp_dport = _safe_int(_first_nonempty(row, ["tcp.dstport", "tcp.dport", "dstport"], default="0"), default=0)
-    udp_sport = _safe_int(_first_nonempty(row, ["udp.srcport", "udp.srcpor", "udp.sport"], default="0"), default=0)
-    udp_dport = _safe_int(_first_nonempty(row, ["udp.dstport", "udp.dstpor", "udp.dport"], default="0"), default=0)
+    tcp_sport = _safe_int(_first_nonempty(row, ["tcp.srcport", "tcp.sport", "srcport", "source.port", "src_port"], default="0"), default=0)
+    tcp_dport = _safe_int(_first_nonempty(row, ["tcp.dstport", "tcp.dport", "dstport", "destination.port", "dst_port"], default="0"), default=0)
+    udp_sport = _safe_int(_first_nonempty(row, ["udp.srcport", "udp.srcpor", "udp.sport", "srcport", "src_port"], default="0"), default=0)
+    udp_dport = _safe_int(_first_nonempty(row, ["udp.dstport", "udp.dstpor", "udp.dport", "dstport", "dst_port"], default="0"), default=0)
 
     if proto == 6:
         src_port, dst_port = tcp_sport, tcp_dport
@@ -212,26 +265,36 @@ def process_csv_to_summed_images(csv_path, mode='train'):
     current_interval_start = -1
     active_flows = defaultdict(list)
     label = False
+    rows_total = 0
+    rows_skipped_ts = 0
+    rows_skipped_5tuple = 0
+    rows_used = 0
+    intervals_saved = 0
 
     try:
         with open(csv_path, 'r', newline='') as csv_file:
             reader = csv.DictReader(csv_file)
+            print(f"CSV columns detected ({len(reader.fieldnames or [])}): {reader.fieldnames}")
             pbar = tqdm(desc="Processing CSV Rows", unit="row")
 
             for row in reader:
                 pbar.update(1)
+                rows_total += 1
+                row = _normalize_row_keys(row)
 
-                ts = _safe_float(_first_nonempty(row, ["frame.time_epoch", "frame.time", "timestamp", "time"]))
+                ts = _parse_timestamp(row)
                 size = _safe_int(_first_nonempty(row, ["frame.len", "length", "pkt_len", "packet_length"], default="0"), default=0)
 
                 if ts is None:
+                    rows_skipped_ts += 1
                     continue
 
                 if current_interval_start == -1:
                     current_interval_start = ts
 
                 if ts >= current_interval_start + config.FLOWPIC_TIME_INTERVAL:
-                    save_interval(active_flows, current_interval_start, label, mode=mode)
+                    if save_interval(active_flows, current_interval_start, label, mode=mode):
+                        intervals_saved += 1
 
                     current_interval_start += config.FLOWPIC_TIME_INTERVAL
                     label = False
@@ -239,6 +302,7 @@ def process_csv_to_summed_images(csv_path, mode='train'):
 
                 five_tuple = get_5tuple_from_csv_row(row)
                 if five_tuple:
+                    rows_used += 1
                     active_flows[five_tuple].append((ts, size))
 
                     if label is False:
@@ -246,11 +310,21 @@ def process_csv_to_summed_images(csv_path, mode='train'):
                             label = True
                         elif (five_tuple[0] in config.VICTIM_IP) and (five_tuple[1] in config.ATTACKER_IP):
                             label = True
+                else:
+                    rows_skipped_5tuple += 1
 
             if active_flows:
-                save_interval(active_flows, current_interval_start, label, mode=mode)
+                if save_interval(active_flows, current_interval_start, label, mode=mode):
+                    intervals_saved += 1
 
             pbar.close()
+            print("--- CSV processing summary ---")
+            print(f"Rows read:            {rows_total}")
+            print(f"Rows skipped (time):  {rows_skipped_ts}")
+            print(f"Rows skipped (tuple): {rows_skipped_5tuple}")
+            print(f"Rows used:            {rows_used}")
+            print(f"Intervals saved:      {intervals_saved}")
+            print(f"Output base dir:      {config.TENSORS_DIR}")
 
     except KeyboardInterrupt:
         print("\nStopping...")
@@ -260,7 +334,7 @@ def save_interval(active_flows, interval_start_ts, label, mode):
     Generates FlowPics for all flows, sums them, determines label, and saves.
     """
     if not active_flows:
-        return
+        return False
 
     # Initialize the master summed image
     # Shape: (1, 1500, 1500) assuming grayscale/binary single channel
@@ -309,6 +383,7 @@ def save_interval(active_flows, interval_start_ts, label, mode):
         summed_image = np.clip(summed_image, 0, 255)
 
     output_dir = get_output_dir(mode, label)
+    os.makedirs(output_dir, exist_ok=True)
 
     # --- SAVING ---
     # Format: {ts}_{label}.npy
@@ -320,6 +395,9 @@ def save_interval(active_flows, interval_start_ts, label, mode):
         np.save(save_path, summed_image.astype("uint8"))
     else:
         np.save(save_path, summed_image)
+
+    print(f"Saved interval image: {save_path} | flows={len(active_flows)} | label={'malicious' if label else 'benign'}")
+    return True
 
 def get_output_dir(mode, label):
     if mode == 'train':
