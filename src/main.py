@@ -1,6 +1,5 @@
 import os
 import argparse
-from preprocess import process_source_to_summed_images
 import config
 
 def ensure_dirs():
@@ -38,6 +37,7 @@ def run_single_attack(attack, args):
     if args.preprocess:
         print(f"   [1/2] Processing PCAP...")
         try:
+            from preprocess import process_source_to_summed_images
             process_source_to_summed_images(mode='test') 
         except Exception as e:
             print(f"Error in processing: {e}")
@@ -117,6 +117,7 @@ def main(args):
 
     if args.preprocess and args.train:
         print("Step 2: Processing flows and converting to image tensors...")
+        from preprocess import process_source_to_summed_images
         process_source_to_summed_images('train')
         
         print("Step 3: Training model on benign traffic...")
@@ -126,6 +127,7 @@ def main(args):
 
     elif args.preprocess and args.test:
         print("Step 2: Processing flows and converting to image tensors...")
+        from preprocess import process_source_to_summed_images
         process_source_to_summed_images('test')
 
         print("Step 3: Testing model on mixed traffic...")
@@ -144,6 +146,7 @@ def main(args):
 
     elif args.preprocess:
         print("Step 2: Processing flows and converting to image tensors...")
+        from preprocess import process_source_to_summed_images
         process_source_to_summed_images('train')
         
     if not any([args.preprocess, args.train, args.test]):

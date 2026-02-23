@@ -64,7 +64,7 @@ def train_model():
     train_loader = DataLoader(full_dataset, batch_size=Config.BATCH_SIZE, shuffle=True)
     
     # Optimizer
-    model = FlowPicCNN(input_dim=Config.FLOWPIC_DIM, num_classes=2)
+    model = FlowPicCNN(input_dim=Config.FLOWPIC_DIM, num_classes=2).to(device)
     model.train()
     optimizer = optim.Adam(model.parameters(), lr=Config.LEARNING_RATE)
     criterion = nn.CrossEntropyLoss() # Fallback for pure batches
