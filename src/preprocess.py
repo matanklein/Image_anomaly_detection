@@ -8,6 +8,13 @@ from collections import defaultdict
 from tqdm import tqdm
 import config
 
+TS_FORMATS = (
+    "%b %d, %Y %H:%M:%S.%f",
+    "%b %d, %Y %H:%M:%S",
+    "%Y-%m-%d %H:%M:%S.%f",
+    "%Y-%m-%d %H:%M:%S",
+)
+
 # Custom FlowPic generation function
 def get_flowpic(timetofirst, pkts_size, flowpic_dim=1500, max_block_duration=60):
     """
@@ -163,6 +170,32 @@ def _first_nonempty(row, keys, default=""):
                 return value
     return default
 
+def _normalize_key(key):
+    if key is None:
+        return ""
+    return str(key).replace("\ufeff", "").strip().strip('"').strip("'").lower()
+
+def _clean_text(value):
+    if value is None:
+        return ""
+    return str(value).replace("\ufeff", "").strip().strip('"').strip("'")
+
+def _safe_int_from_text(value, default=0):
+    text = _clean_text(value)
+    if text == "":
+        return default
+
+    if text.isdigit() or (text[0] == '-' and text[1:].isdigit()):
+        try:
+            return int(text)
+        except (ValueError, TypeError, AttributeError):
+            return default
+
+    try:
+        return int(float(text))
+    except (ValueError, TypeError, AttributeError):
+        return default
+
 def _safe_int(value, default=0):
     try:
         return int(float(str(value).strip()))
@@ -174,6 +207,137 @@ def _safe_float(value, default=None):
         return float(str(value).strip())
     except (ValueError, TypeError, AttributeError):
         return default
+
+def _find_first_header_index(header_index, candidate_names):
+    for name in candidate_names:
+        idx = header_index.get(name)
+        if idx is not None:
+            return idx
+    return -1
+
+def _first_nonempty_at_indices(values, indices):
+    values_len = len(values)
+    for idx in indices:
+        if idx < 0 or idx >= values_len:
+            continue
+        value = values[idx]
+        if value is None:
+            continue
+        text = _clean_text(value)
+        if text != "":
+            return text
+    return ""
+
+def _build_csv_column_indices(headers):
+    normalized_headers = [_normalize_key(h) for h in headers]
+    header_index = {name: idx for idx, name in enumerate(normalized_headers)}
+
+    indices = {
+        "ts": [
+            _find_first_header_index(header_index, ["frame.time_epoch"]),
+            _find_first_header_index(header_index, ["frame.time"]),
+            _find_first_header_index(header_index, ["timestamp"]),
+            _find_first_header_index(header_index, ["time"]),
+            _find_first_header_index(header_index, ["ts"]),
+        ],
+        "size": [
+            _find_first_header_index(header_index, ["frame.len"]),
+            _find_first_header_index(header_index, ["length"]),
+            _find_first_header_index(header_index, ["pkt_len"]),
+            _find_first_header_index(header_index, ["packet_length"]),
+        ],
+        "src_ip": [
+            _find_first_header_index(header_index, ["ip.src"]),
+            _find_first_header_index(header_index, ["src_ip"]),
+            _find_first_header_index(header_index, ["source_ip"]),
+        ],
+        "dst_ip": [
+            _find_first_header_index(header_index, ["ip.dst"]),
+            _find_first_header_index(header_index, ["dst_ip"]),
+            _find_first_header_index(header_index, ["destination_ip"]),
+        ],
+        "proto": [
+            _find_first_header_index(header_index, ["ip.proto"]),
+            _find_first_header_index(header_index, ["protocol"]),
+            _find_first_header_index(header_index, ["proto"]),
+        ],
+        "tcp_sport": [
+            _find_first_header_index(header_index, ["tcp.srcport"]),
+            _find_first_header_index(header_index, ["tcp.sport"]),
+        ],
+        "tcp_dport": [
+            _find_first_header_index(header_index, ["tcp.dstport"]),
+            _find_first_header_index(header_index, ["tcp.dport"]),
+        ],
+        "udp_sport": [
+            _find_first_header_index(header_index, ["udp.srcport"]),
+            _find_first_header_index(header_index, ["udp.sport"]),
+        ],
+        "udp_dport": [
+            _find_first_header_index(header_index, ["udp.dstport"]),
+            _find_first_header_index(header_index, ["udp.dport"]),
+        ],
+    }
+
+    return indices
+
+def _parse_timestamp_fast(values, ts_indices, parser_state):
+    ts_raw = _first_nonempty_at_indices(values, ts_indices)
+    if ts_raw == "":
+        return None
+
+    parser_mode = parser_state.get("mode")
+
+    if parser_mode == "epoch":
+        return _safe_float(ts_raw, default=None)
+
+    if parser_mode == "format":
+        fmt = parser_state.get("format")
+        if fmt is not None:
+            try:
+                return datetime.strptime(" ".join(ts_raw.split()), fmt).timestamp()
+            except ValueError:
+                parser_state["mode"] = None
+                parser_state["format"] = None
+
+    direct = _safe_float(ts_raw, default=None)
+    if direct is not None:
+        parser_state["mode"] = "epoch"
+        parser_state["format"] = None
+        return direct
+
+    cleaned = " ".join(ts_raw.split())
+    for fmt in TS_FORMATS:
+        try:
+            parsed = datetime.strptime(cleaned, fmt).timestamp()
+            parser_state["mode"] = "format"
+            parser_state["format"] = fmt
+            return parsed
+        except ValueError:
+            continue
+
+    return None
+
+def _extract_5tuple_from_csv_values(values, column_indices):
+    src_ip = _first_nonempty_at_indices(values, column_indices["src_ip"])
+    dst_ip = _first_nonempty_at_indices(values, column_indices["dst_ip"])
+    if src_ip == "" or dst_ip == "":
+        return None
+
+    proto = _safe_int_from_text(_first_nonempty_at_indices(values, column_indices["proto"]), default=0)
+    tcp_sport = _safe_int_from_text(_first_nonempty_at_indices(values, column_indices["tcp_sport"]), default=0)
+    tcp_dport = _safe_int_from_text(_first_nonempty_at_indices(values, column_indices["tcp_dport"]), default=0)
+    udp_sport = _safe_int_from_text(_first_nonempty_at_indices(values, column_indices["udp_sport"]), default=0)
+    udp_dport = _safe_int_from_text(_first_nonempty_at_indices(values, column_indices["udp_dport"]), default=0)
+
+    if proto == 6:
+        src_port, dst_port = tcp_sport, tcp_dport
+    elif proto == 17:
+        src_port, dst_port = udp_sport, udp_dport
+    else:
+        src_port, dst_port = (tcp_sport or udp_sport), (tcp_dport or udp_dport)
+
+    return (src_ip, dst_ip, src_port, dst_port, proto)
 
 def _normalize_row_keys(row):
     normalized = {}
@@ -271,20 +435,30 @@ def process_csv_to_summed_images(csv_path, mode='train'):
     rows_used = 0
     intervals_saved = 0
 
+    attacker_ip_set = set(config.ATTACKER_IP)
+    victim_ip_set = set(config.VICTIM_IP)
+    interval_len = config.FLOWPIC_TIME_INTERVAL
+    parser_state = {"mode": None, "format": None}
+
     try:
         with open(csv_path, 'r', newline='') as csv_file:
-            reader = csv.DictReader(csv_file)
-            print(f"CSV columns detected ({len(reader.fieldnames or [])}): {reader.fieldnames}")
+            reader = csv.reader(csv_file)
+            headers = next(reader, None)
+            if headers is None:
+                print("CSV file is empty. Nothing to process.")
+                return
+
+            print(f"CSV columns detected ({len(headers)}): {headers}")
+            column_indices = _build_csv_column_indices(headers)
+            size_indices = column_indices["size"]
+
             pbar = tqdm(desc="Processing CSV Rows", unit="row")
 
-            for row in reader:
+            for values in reader:
                 pbar.update(1)
                 rows_total += 1
-                row = _normalize_row_keys(row)
 
-                ts = _parse_timestamp(row)
-                size = _safe_int(_first_nonempty(row, ["frame.len", "length", "pkt_len", "packet_length"], default="0"), default=0)
-
+                ts = _parse_timestamp_fast(values, column_indices["ts"], parser_state)
                 if ts is None:
                     rows_skipped_ts += 1
                     continue
@@ -292,26 +466,27 @@ def process_csv_to_summed_images(csv_path, mode='train'):
                 if current_interval_start == -1:
                     current_interval_start = ts
 
-                if ts >= current_interval_start + config.FLOWPIC_TIME_INTERVAL:
+                while ts >= current_interval_start + interval_len:
                     if save_interval(active_flows, current_interval_start, label, mode=mode):
                         intervals_saved += 1
-
-                    current_interval_start += config.FLOWPIC_TIME_INTERVAL
+                    current_interval_start += interval_len
                     label = False
                     active_flows.clear()
 
-                five_tuple = get_5tuple_from_csv_row(row)
-                if five_tuple:
-                    rows_used += 1
-                    active_flows[five_tuple].append((ts, size))
-
-                    if label is False:
-                        if (five_tuple[0] in config.ATTACKER_IP) and (five_tuple[1] in config.VICTIM_IP):
-                            label = True
-                        elif (five_tuple[0] in config.VICTIM_IP) and (five_tuple[1] in config.ATTACKER_IP):
-                            label = True
-                else:
+                size = _safe_int_from_text(_first_nonempty_at_indices(values, size_indices), default=0)
+                five_tuple = _extract_5tuple_from_csv_values(values, column_indices)
+                if five_tuple is None:
                     rows_skipped_5tuple += 1
+                    continue
+
+                rows_used += 1
+                active_flows[five_tuple].append((ts, size))
+
+                if label is False:
+                    src_ip, dst_ip = five_tuple[0], five_tuple[1]
+                    if ((src_ip in attacker_ip_set and dst_ip in victim_ip_set) or
+                        (src_ip in victim_ip_set and dst_ip in attacker_ip_set)):
+                        label = True
 
             if active_flows:
                 if save_interval(active_flows, current_interval_start, label, mode=mode):
