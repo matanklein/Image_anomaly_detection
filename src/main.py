@@ -6,8 +6,7 @@ def ensure_dirs():
     """Ensure all required directories exist for storing tensors and model outputs."""
     # Create base tensor directory
     os.makedirs(config.TENSORS_DIR, exist_ok=True)
-    os.makedirs(config.TRAIN_BENIGN_DIR, exist_ok=True)
-    os.makedirs(config.TRAIN_OE_DIR, exist_ok=True)
+    os.makedirs(config.TRAIN_DIR, exist_ok=True)
     # Create test directories
     os.makedirs(config.TEST_BENIGN_DIR, exist_ok=True)
     os.makedirs(config.TEST_MALICIOUS_DIR, exist_ok=True)
