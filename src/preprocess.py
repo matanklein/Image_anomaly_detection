@@ -112,6 +112,7 @@ def process_pcap_to_summed_images(pcap_path, mode='train'):
     
     # Progress bar (approximate since we don't know total packets in stream)
     pbar = tqdm(desc="Processing Packets", unit="pkt")
+    count_packets = 0
 
     label = False  # Default label for the current interval
     
@@ -119,8 +120,11 @@ def process_pcap_to_summed_images(pcap_path, mode='train'):
         for pkt in reader:
             if IP not in pkt:
                 continue
-            
-            pbar.update(1)
+
+            if count_packets % 1000 == 0:
+                pbar.update(1)
+            count_packets += 1
+
             ts = float(pkt.time)
             size = len(pkt)
             
@@ -161,6 +165,7 @@ def process_pcap_to_summed_images(pcap_path, mode='train'):
     finally:
         reader.close()
         pbar.close()
+        print(f"Finished processing. Total packets: {count_packets}")
 
 def _first_nonempty(row, keys, default=""):
     for key in keys:
@@ -455,7 +460,8 @@ def process_csv_to_summed_images(csv_path, mode='train'):
             pbar = tqdm(desc="Processing CSV Rows", unit="row")
 
             for values in reader:
-                pbar.update(1)
+                if rows_total % 1000 == 0:
+                    pbar.update(1)
                 rows_total += 1
 
                 ts = _parse_timestamp_fast(values, column_indices["ts"], parser_state)
