@@ -4,47 +4,47 @@ import numpy as np
 import torch.nn.functional as F
 
 class FlowPicCNN(nn.Module):
-    def __init__(self, input_dim=1500, num_classes=2, dropout_rate=0.5):
+    def __init__(self, num_classes=2):
         super(FlowPicCNN, self).__init__()
         
-        # Layer 1: Conv 10 filters, kernel 10, stride 5
+        # Layer 1: Conv 10 filters, kernel 10, stride 5 
+        # Input 1500x1500 -> Output 300x300
         self.conv1 = nn.Conv2d(1, 10, kernel_size=10, stride=5)
-        self.bn1 = nn.BatchNorm2d(10)
-        self.pool1 = nn.MaxPool2d(2)
+        self.pool1 = nn.MaxPool2d(2) # Output 150x150 
         
-        # Layer 2: Conv 20 filters, kernel 10, stride 5
+        # Layer 2: Conv 20 filters, kernel 10, stride 5 
+        # Input 150x150 -> Output 30x30
         self.conv2 = nn.Conv2d(10, 20, kernel_size=10, stride=5)
-        self.bn2 = nn.BatchNorm2d(20)
-        self.pool2 = nn.MaxPool2d(2)
+        self.pool2 = nn.MaxPool2d(2) # Output 15x15 
         
-        # Calculate Flatten dimension dynamically
-        # Input: 1500 -> Conv1(s5) -> 299 -> Pool(2) -> 149
-        # 149 -> Conv2(s5) -> 28 -> Pool(2) -> 14
-        # 14 * 14 * 20 = 3920 (Approx, logic needs to be exact)
-        self._to_linear = None
-        self._check_dim(input_dim)
+        # Specified Dropout Rates 
+        self.dropout_conv2 = nn.Dropout(0.25)
+        self.dropout_fc = nn.Dropout(0.5)
         
-        self.dropout = nn.Dropout(dropout_rate)
-        self.fc1 = nn.Linear(self._to_linear, 64)
+        # Flattened dimension: 20 maps * 15 * 15 = 4500 
+        self.fc1 = nn.Linear(4500, 64)
         self.fc2 = nn.Linear(64, num_classes)
 
-    def _check_dim(self, dim):
-        with torch.no_grad():
-            x = torch.zeros(1, 1, dim, dim)
-            x = self.pool1(self.bn1(self.conv1(x)))
-            x = self.pool2(self.bn2(self.conv2(x)))
-            self._to_linear = int(np.prod(x.shape[1:]))
-
     def forward(self, x):
-        x = self.pool1(F.relu(self.bn1(self.conv1(x))))
-        x = self.dropout(x)
-        x = self.pool2(F.relu(self.bn2(self.conv2(x))))
-        x = self.dropout(x)
+        # Block 1
+        x = F.relu(self.conv1(x)) # 
+        x = self.pool1(x)
         
-        x = x.view(x.size(0), -1) # Flatten
-        embedding = F.relu(self.fc1(x)) # Embedding vector
+        # Block 2 with 0.25 Dropout 
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.dropout_conv2(x)
+        x = self.pool2(x)
         
-        out = self.fc2(self.dropout(embedding))
+        # Flatten for Dense Layers
+        x = x.view(x.size(0), -1) 
         
-        # Return both logits and embedding (useful for OE)
+        # Hidden Fully-Connected Layer with 0.5 Dropout 
+        embedding = F.relu(self.fc1(x))
+        x = self.dropout_fc(embedding)
+        
+        # Final Logits (Softmax omitted per request)
+        out = self.fc2(x)
+        
+        # Return logits and embedding vector 
         return out, embedding
