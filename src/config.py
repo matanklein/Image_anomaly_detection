@@ -1,6 +1,6 @@
 # Directory structure
-SOURCE_PATH = '/mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/benign-15-02.csv' # CHANGE (during preprocessing)
-TENSORS_DIR = '/mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors' # Base path for npy files
+SOURCE_PATH = '/Datasets/CSE-CIC-IDS2018/CSV/benign-15-02.csv' # CHANGE (during preprocessing)
+TENSORS_DIR = '/output/CSE-CIC-IDS2018/semi-supervised/tensors' # Base path for npy files
 MODEL_DIR = f'{TENSORS_DIR}/models/model-OOD-DeepSVDD-bruteforceWeb2.pth' # CHANGE (during training/testing)
 
 # Subfolders
