@@ -1,7 +1,7 @@
 # Directory structure
-SOURCE_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
-TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
-MODEL_DIR = f'{TENSORS_DIR}/model.pth'
+SOURCE_PATH = '/mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/benign-15-02.csv' # CHANGE (during preprocessing)
+TENSORS_DIR = '/mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors' # Base path for npy files
+MODEL_DIR = f'{TENSORS_DIR}/models/model-OOD-DeepSVDD-bruteforceWeb2.pth' # CHANGE (during training/testing)
 
 # Subfolders
 TRAIN_DIR = f'{TENSORS_DIR}/train'
@@ -24,30 +24,21 @@ IMAGE_TYPE = 'binary' # 'binary' is taking > 0 as 1 when creating FlowPic. 'limi
 IMAGE_AGGREGATION = 'summed' # 'summed' is summing FlowPics in the time window
 CLIP_SUMMED_COUNTS = False # Set to True to cap pixel values at 255, False to keep raw counts
 
-# # --- Model Configuration ---
-MODEL_NAME = "LeNet5Flowpic_OE"
-INPUT_CHANNELS = 1 # Grayscale
-NUM_CLASSES = 2    # 0: Benign, 1: Malicious (used for OE training)
-DROPOUT_RATE = 0.5
+# --- Deep SVDD Configuration ---
+LATENT_DIM = 64
+SVDD_MARGIN = 50.0  # M_OUT: Distance threshold to push OE samples away
 
 # --- Training Hyperparameters ---
 BATCH_SIZE = 128
 LEARNING_RATE = 0.001
 EPOCHS = 20
+WEIGHT_DECAY = 1e-5
 
 # --- Sampling / Calibration ---
-BALANCED_SAMPLING = True   # Oversample minority class (OE) during training
-CALIBRATION_STRATEGY = 'youden'  # 'youden' or 'f1'
-
-# Energy-Based OOD Settings (Liu et al. 2020)
-T = 1.0
-# Paper Eq. 6 Margins:
-# We want Benign Energy < -5
-# We want Attack Energy > -1
-M_IN = -5.0 
-M_OUT = -1.0 
-OE_LAMBDA = 1.0  # Weight for OE margin term (higher to avoid benign-only collapse)
-OOD_THRESHOLD = -3.0  # Energy threshold for classifying as Malicious - must be between M_IN and M_OUT.
+BALANCED_SAMPLING = True # Oversample minority class (OE) during training
+CALIBRATION_STRATEGY = 'youden' # 'youden' or 'f1'
+OOD_THRESHOLD = 10.0 # Initial fallback threshold (will be calibrated)
+OE_LAMBDA = 1.0
 
 # Labels
 BENIGN_LABEL = 0
