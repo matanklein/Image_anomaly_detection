@@ -9,12 +9,12 @@ class FlowPicCNN(nn.Module):
         
         # Layer 1: Conv 10 filters, kernel 10, stride 5 
         # Input 1500x1500 -> Output 300x300
-        self.conv1 = nn.Conv2d(1, 10, kernel_size=10, stride=5)
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=10, padding=3, stride=5)
         self.pool1 = nn.MaxPool2d(2) # Output 150x150 
         
         # Layer 2: Conv 20 filters, kernel 10, stride 5 
         # Input 150x150 -> Output 30x30
-        self.conv2 = nn.Conv2d(10, 20, kernel_size=10, stride=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=10, padding=3, stride=5)
         self.pool2 = nn.MaxPool2d(2) # Output 15x15 
         
         # Specified Dropout Rates 

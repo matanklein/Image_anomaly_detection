@@ -1,7 +1,7 @@
 # Directory structure
-SOURCE_PATH = '../data/cic2018/bruteforce-xss-1-22_02_2018.pcap' # CHANGE
-TENSORS_DIR = '../output/cic2018/semi-supervised/tensors' # Base path for npy files
-MODEL_DIR = f'{TENSORS_DIR}/model.pth'
+SOURCE_PATH = '/mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/benign-15-02.csv' # CHANGE (during preprocessing)
+TENSORS_DIR = '/mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors' # Base path for npy files
+MODEL_DIR = f'{TENSORS_DIR}/models/model-OOD-bruforceWeb2.pth' # CHANGE (during training/testing)
 
 # Subfolders
 TRAIN_DIR = f'{TENSORS_DIR}/train'
