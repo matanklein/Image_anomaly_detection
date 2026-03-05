@@ -11,8 +11,24 @@ from dataset import TrafficImageDataset
 from cnn_model import FlowPicCNN
 
 def compute_distance_score(embeddings, center):
-    """Energy E(x) is defined as the squared Euclidean distance to center c."""
+    """Energy E(x) based on selected metric in config."""
+    metric = Config.DISTANCE_METRIC.lower()
+
+    if metric == 'cosine':
+        return compute_cosine_distance_score(embeddings, center)
+    if metric == 'euclidean':
+        return compute_euclidean_distance_score(embeddings, center)
+
+    raise ValueError(f"Unsupported DISTANCE_METRIC: {metric}. Use 'euclidean' or 'cosine'.")
+
+def compute_euclidean_distance_score(embeddings, center):
+    """Squared Euclidean distance to center c."""
     return torch.sum((embeddings - center) ** 2, dim=1)
+
+def compute_cosine_distance_score(embeddings, center):
+    """Cosine distance to center c: 1 - cosine_similarity."""
+    cosine_sim = F.cosine_similarity(embeddings, center.unsqueeze(0), dim=1)
+    return 1.0 - cosine_sim
 
 def _best_threshold(labels, scores, strategy='youden'):
     labels = np.asarray(labels).astype(int)
@@ -120,7 +136,7 @@ def deep_svdd_loss(embeddings, labels, center):
     """
     Minimizes distance for benign samples; maximizes (up to margin) for OE samples.
     """
-    dist = torch.sum((embeddings - center) ** 2, dim=1)
+    dist = compute_distance_score(embeddings, center)
     
     mask_in = (labels == Config.BENIGN_LABEL)
     mask_out = (labels == Config.MALICIOUS_LABEL)
@@ -184,7 +200,8 @@ def train_model():
     optimizer = optim.Adam(model.parameters(), lr=Config.LEARNING_RATE, weight_decay=Config.WEIGHT_DECAY)
     model.train()
     
-    print("--- Starting Training (Deep SVDD with OE) ---")
+    metric = Config.DISTANCE_METRIC.lower()
+    print(f"--- Starting Training (Deep SVDD with OE, metric={metric}) ---")
     
     for epoch in range(Config.EPOCHS):
         total_loss = 0
