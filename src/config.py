@@ -27,6 +27,7 @@ CLIP_SUMMED_COUNTS = False # Set to True to cap pixel values at 255, False to ke
 # --- Deep SVDD Configuration ---
 LATENT_DIM = 64
 SVDD_MARGIN = 50.0  # M_OUT: Distance threshold to push OE samples away
+DISTANCE_METRIC = 'euclidean' # 'euclidean' or 'cosine'
 
 # --- Training Hyperparameters ---
 BATCH_SIZE = 128
