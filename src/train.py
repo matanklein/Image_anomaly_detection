@@ -10,25 +10,27 @@ import config as Config
 from dataset import TrafficImageDataset 
 from cnn_model import FlowPicCNN
 
+def _normalize_embeddings(embeddings):
+    """Applies L2 normalization to project vectors onto the unit hypersphere."""
+    return F.normalize(embeddings, p=2, dim=1)
+
 def compute_distance_score(embeddings, center):
     """Energy E(x) based on selected metric in config."""
     metric = Config.DISTANCE_METRIC.lower()
 
     if metric == 'cosine':
-        return compute_cosine_distance_score(embeddings, center)
+        # Ensure strict projection onto the unit sphere
+        embeddings_norm = _normalize_embeddings(embeddings)
+        center_norm = _normalize_embeddings(center.unsqueeze(0))
+        # Cosine distance: 1 - cosine_similarity. Bound is [0, 2]
+        cosine_sim = F.cosine_similarity(embeddings_norm, center_norm, dim=1)
+        return 1.0 - cosine_sim
+        
     if metric == 'euclidean':
-        return compute_euclidean_distance_score(embeddings, center)
+        # Unconstrained space: Squared Euclidean Distance
+        return torch.sum((embeddings - center) ** 2, dim=1)
 
     raise ValueError(f"Unsupported DISTANCE_METRIC: {metric}. Use 'euclidean' or 'cosine'.")
-
-def compute_euclidean_distance_score(embeddings, center):
-    """Squared Euclidean distance to center c."""
-    return torch.sum((embeddings - center) ** 2, dim=1)
-
-def compute_cosine_distance_score(embeddings, center):
-    """Cosine distance to center c: 1 - cosine_similarity."""
-    cosine_sim = F.cosine_similarity(embeddings, center.unsqueeze(0), dim=1)
-    return 1.0 - cosine_sim
 
 def _best_threshold(labels, scores, strategy='youden'):
     labels = np.asarray(labels).astype(int)
@@ -123,13 +125,25 @@ def init_center_c(train_loader, model, device, eps=0.1):
                 continue
             images = images[mask_in].to(device).float()
             embeddings = model(images)
+            
+            # If using Cosine, we must project the initial random embeddings to the unit sphere
+            # before taking their mean, otherwise the mean is geometrically warped.
+            if Config.DISTANCE_METRIC.lower() == 'cosine':
+                embeddings = _normalize_embeddings(embeddings)
+                
             center += torch.sum(embeddings, dim=0)
             n_samples += embeddings.size(0)
     
-    # Avoid trivial zero collapse
     center = center / (n_samples + 1e-6)
-    center[(abs(center) < eps) & (center < 0)] = -eps
-    center[(abs(center) < eps) & (center > 0)] = eps
+    
+    # Final normalization of the centroid if using Cosine distance
+    if Config.DISTANCE_METRIC.lower() == 'cosine':
+        center = _normalize_embeddings(center.unsqueeze(0)).squeeze(0)
+    else:
+        # Euclidean epsilon bump to avoid trivial zero collapse
+        center[(abs(center) < eps) & (center < 0)] = -eps
+        center[(abs(center) < eps) & (center > 0)] = eps
+        
     return center
 
 def deep_svdd_loss(embeddings, labels, center):
@@ -143,6 +157,14 @@ def deep_svdd_loss(embeddings, labels, center):
     
     total_loss = 0.0
     
+    # Dynamic margin adjustment based on metric
+    metric = Config.DISTANCE_METRIC.lower()
+    margin = Config.SVDD_MARGIN
+    if metric == 'cosine':
+        # Cosine distance maxes at 2.0. Using 50.0 forces impossible gradients.
+        # We cap the margin at 1.0 (orthogonal) to maintain stable geometric bounds.
+        margin = min(1.0, Config.SVDD_MARGIN)
+    
     # 1. Minimize Distance for Benign (In-Distribution)
     if mask_in.sum() > 0:
         loss_in = dist[mask_in].mean()
@@ -150,7 +172,7 @@ def deep_svdd_loss(embeddings, labels, center):
         
     # 2. Maximize Distance for OE/OOD Proxy Data
     if mask_out.sum() > 0:
-        loss_out = torch.pow(F.relu(Config.SVDD_MARGIN - dist[mask_out]), 2).mean()
+        loss_out = torch.pow(F.relu(margin - dist[mask_out]), 2).mean()
         total_loss += Config.OE_LAMBDA * loss_out
         
     return total_loss

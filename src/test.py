@@ -1,4 +1,5 @@
 import torch
+import torch.nn.functional as F
 from torch.utils.data import DataLoader, ConcatDataset
 import numpy as np
 import os
@@ -10,9 +11,28 @@ from results import evaluate_model
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+def _normalize_embeddings(embeddings):
+    """Applies L2 normalization to project vectors onto the unit hypersphere."""
+    return F.normalize(embeddings, p=2, dim=1)
+
 def compute_distance_score(embeddings, center):
-    """Energy E(x) = ||phi(x) - c||^2"""
-    return torch.sum((embeddings - center) ** 2, dim=1)
+    """Energy E(x) based on selected metric in config."""
+    metric = config.DISTANCE_METRIC.lower()
+
+    if metric == 'cosine':
+        # Ensure strict projection onto the unit sphere for both embedding and center
+        embeddings_norm = _normalize_embeddings(embeddings)
+        center_norm = _normalize_embeddings(center.unsqueeze(0))
+        # Cosine distance: 1 - cosine_similarity. Bound is [0, 2]
+        cosine_sim = F.cosine_similarity(embeddings_norm, center_norm, dim=1)
+        return 1.0 - cosine_sim
+        
+    if metric == 'euclidean':
+        # Unconstrained space: Squared Euclidean Distance
+        return torch.sum((embeddings - center) ** 2, dim=1)
+
+    raise ValueError(f"Unsupported DISTANCE_METRIC: {metric}. Use 'euclidean' or 'cosine'.")
+
 
 def test_model():
     print(f"--- Testing Model on {device} ---")
@@ -66,7 +86,8 @@ def test_model():
     energy_scores = []
     true_labels = []
 
-    print("Running Inference (Deep SVDD Distance)...")
+    metric_name = config.DISTANCE_METRIC.lower()
+    print(f"Running Inference (Deep SVDD Distance | Metric: {metric_name})...")
 
     with torch.no_grad():
         for i, (images, labels) in enumerate(loader):
