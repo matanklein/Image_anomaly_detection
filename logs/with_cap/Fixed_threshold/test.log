@@ -1,0 +1,847 @@
+ML Virtual Environment Helper
+==============================
+Virtual environment location: /mnt/exdisk1/matan/ml_env
+
+Warning: virtualenv is on a noexec mount; using local executable clone: /home/matan/.ml_env_exec/bin/python
+STARTING BATCH BENCHMARK MODE
+========================================
+Experiment 1/20
+
+>>> Setting up environment for: bot1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 0 Benign samples, 82 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.0000
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          N/A (Only one class in dataset)
+------------------------------
+Confusion Matrix:
+[[ 0  0]
+ [82  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 0
+FP (False Alarms):   0
+FN (Missed Attacks): 82
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.00      0.00      0.00       0.0
+   Malicious       0.00      0.00      0.00      82.0
+
+    accuracy                           0.00      82.0
+   macro avg       0.00      0.00      0.00      82.0
+weighted avg       0.00      0.00      0.00      82.0
+
+==============================
+Experiment 2/20
+
+>>> Setting up environment for: bot2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 2 Benign samples, 91 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.0215
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[ 2  0]
+ [91  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 2
+FP (False Alarms):   0
+FN (Missed Attacks): 91
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.02      1.00      0.04         2
+   Malicious       0.00      0.00      0.00        91
+
+    accuracy                           0.02        93
+   macro avg       0.01      0.50      0.02        93
+weighted avg       0.00      0.02      0.00        93
+
+==============================
+Experiment 3/20
+
+>>> Setting up environment for: bruteforceWeb1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 22 Benign samples, 71 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.2366
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0045
+------------------------------
+Confusion Matrix:
+[[22  0]
+ [71  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 22
+FP (False Alarms):   0
+FN (Missed Attacks): 71
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.24      1.00      0.38        22
+   Malicious       0.00      0.00      0.00        71
+
+    accuracy                           0.24        93
+   macro avg       0.12      0.50      0.19        93
+weighted avg       0.06      0.24      0.09        93
+
+==============================
+Experiment 4/20
+
+>>> Setting up environment for: bruteforceXSS1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 26 Benign samples, 39 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.4000
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[26  0]
+ [39  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 26
+FP (False Alarms):   0
+FN (Missed Attacks): 39
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.40      1.00      0.57        26
+   Malicious       0.00      0.00      0.00        39
+
+    accuracy                           0.40        65
+   macro avg       0.20      0.50      0.29        65
+weighted avg       0.16      0.40      0.23        65
+
+==============================
+Experiment 5/20
+
+>>> Setting up environment for: bruteforceXSS2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 28 Benign samples, 71 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.2828
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[28  0]
+ [71  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 28
+FP (False Alarms):   0
+FN (Missed Attacks): 71
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.28      1.00      0.44        28
+   Malicious       0.00      0.00      0.00        71
+
+    accuracy                           0.28        99
+   macro avg       0.14      0.50      0.22        99
+weighted avg       0.08      0.28      0.12        99
+
+==============================
+Experiment 6/20
+
+>>> Setting up environment for: ddosHoic
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 12 Benign samples, 56 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.1765
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[12  0]
+ [56  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 12
+FP (False Alarms):   0
+FN (Missed Attacks): 56
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.18      1.00      0.30        12
+   Malicious       0.00      0.00      0.00        56
+
+    accuracy                           0.18        68
+   macro avg       0.09      0.50      0.15        68
+weighted avg       0.03      0.18      0.05        68
+
+==============================
+Experiment 7/20
+
+>>> Setting up environment for: ddosLoicHttp
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 29 Benign samples, 64 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.3118
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[29  0]
+ [64  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 29
+FP (False Alarms):   0
+FN (Missed Attacks): 64
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.31      1.00      0.48        29
+   Malicious       0.00      0.00      0.00        64
+
+    accuracy                           0.31        93
+   macro avg       0.16      0.50      0.24        93
+weighted avg       0.10      0.31      0.15        93
+
+==============================
+Experiment 8/20
+
+>>> Setting up environment for: ddosLoicUdp1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 2 Benign samples, 16 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.1111
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[ 2  0]
+ [16  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 2
+FP (False Alarms):   0
+FN (Missed Attacks): 16
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.11      1.00      0.20         2
+   Malicious       0.00      0.00      0.00        16
+
+    accuracy                           0.11        18
+   macro avg       0.06      0.50      0.10        18
+weighted avg       0.01      0.11      0.02        18
+
+==============================
+Experiment 9/20
+
+>>> Setting up environment for: dosGoldeneye
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 57 Benign samples, 20 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.7403
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0465
+------------------------------
+Confusion Matrix:
+[[57  0]
+ [20  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 57
+FP (False Alarms):   0
+FN (Missed Attacks): 20
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.74      1.00      0.85        57
+   Malicious       0.00      0.00      0.00        20
+
+    accuracy                           0.74        77
+   macro avg       0.37      0.50      0.43        77
+weighted avg       0.55      0.74      0.63        77
+
+==============================
+Experiment 10/20
+
+>>> Setting up environment for: dosHulk
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 14 Benign samples, 14 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.5000
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[14  0]
+ [14  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 14
+FP (False Alarms):   0
+FN (Missed Attacks): 14
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.50      1.00      0.67        14
+   Malicious       0.00      0.00      0.00        14
+
+    accuracy                           0.50        28
+   macro avg       0.25      0.50      0.33        28
+weighted avg       0.25      0.50      0.33        28
+
+==============================
+Experiment 11/20
+
+>>> Setting up environment for: dosSlowhttptest
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 28 Benign samples, 54 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.3415
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[28  0]
+ [54  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 28
+FP (False Alarms):   0
+FN (Missed Attacks): 54
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.34      1.00      0.51        28
+   Malicious       0.00      0.00      0.00        54
+
+    accuracy                           0.34        82
+   macro avg       0.17      0.50      0.25        82
+weighted avg       0.12      0.34      0.17        82
+
+==============================
+Experiment 12/20
+
+>>> Setting up environment for: dosSlowloris
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 37 Benign samples, 42 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.4684
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[37  0]
+ [42  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 37
+FP (False Alarms):   0
+FN (Missed Attacks): 42
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.47      1.00      0.64        37
+   Malicious       0.00      0.00      0.00        42
+
+    accuracy                           0.47        79
+   macro avg       0.23      0.50      0.32        79
+weighted avg       0.22      0.47      0.30        79
+
+==============================
+Experiment 13/20
+
+>>> Setting up environment for: ftpBruteforce
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 35 Benign samples, 98 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.2632
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[35  0]
+ [98  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 35
+FP (False Alarms):   0
+FN (Missed Attacks): 98
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.26      1.00      0.42        35
+   Malicious       0.00      0.00      0.00        98
+
+    accuracy                           0.26       133
+   macro avg       0.13      0.50      0.21       133
+weighted avg       0.07      0.26      0.11       133
+
+==============================
+Experiment 14/20
+
+>>> Setting up environment for: Infiltration1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 35 Benign samples, 47 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.4268
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.1149
+------------------------------
+Confusion Matrix:
+[[35  0]
+ [47  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 35
+FP (False Alarms):   0
+FN (Missed Attacks): 47
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.43      1.00      0.60        35
+   Malicious       0.00      0.00      0.00        47
+
+    accuracy                           0.43        82
+   macro avg       0.21      0.50      0.30        82
+weighted avg       0.18      0.43      0.26        82
+
+==============================
+Experiment 15/20
+
+>>> Setting up environment for: Infiltration2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 20 Benign samples, 37 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.3509
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.1446
+------------------------------
+Confusion Matrix:
+[[20  0]
+ [37  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 20
+FP (False Alarms):   0
+FN (Missed Attacks): 37
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.35      1.00      0.52        20
+   Malicious       0.00      0.00      0.00        37
+
+    accuracy                           0.35        57
+   macro avg       0.18      0.50      0.26        57
+weighted avg       0.12      0.35      0.18        57
+
+==============================
+Experiment 16/20
+
+>>> Setting up environment for: Infiltration3
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 5 Benign samples, 34 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.1282
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[ 5  0]
+ [34  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 5
+FP (False Alarms):   0
+FN (Missed Attacks): 34
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.13      1.00      0.23         5
+   Malicious       0.00      0.00      0.00        34
+
+    accuracy                           0.13        39
+   macro avg       0.06      0.50      0.11        39
+weighted avg       0.02      0.13      0.03        39
+
+==============================
+Experiment 17/20
+
+>>> Setting up environment for: Infiltration4
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 0 Benign samples, 99 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.0000
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          N/A (Only one class in dataset)
+------------------------------
+Confusion Matrix:
+[[ 0  0]
+ [99  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 0
+FP (False Alarms):   0
+FN (Missed Attacks): 99
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.00      0.00      0.00       0.0
+   Malicious       0.00      0.00      0.00      99.0
+
+    accuracy                           0.00      99.0
+   macro avg       0.00      0.00      0.00      99.0
+weighted avg       0.00      0.00      0.00      99.0
+
+==============================
+Experiment 18/20
+
+>>> Setting up environment for: sqlInjection1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 29 Benign samples, 11 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.7250
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0423
+------------------------------
+Confusion Matrix:
+[[29  0]
+ [11  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 29
+FP (False Alarms):   0
+FN (Missed Attacks): 11
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.72      1.00      0.84        29
+   Malicious       0.00      0.00      0.00        11
+
+    accuracy                           0.73        40
+   macro avg       0.36      0.50      0.42        40
+weighted avg       0.53      0.72      0.61        40
+
+==============================
+Experiment 19/20
+
+>>> Setting up environment for: sqlInjection2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 30 Benign samples, 10 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.7500
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0200
+------------------------------
+Confusion Matrix:
+[[30  0]
+ [10  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 30
+FP (False Alarms):   0
+FN (Missed Attacks): 10
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.75      1.00      0.86        30
+   Malicious       0.00      0.00      0.00        10
+
+    accuracy                           0.75        40
+   macro avg       0.38      0.50      0.43        40
+weighted avg       0.56      0.75      0.64        40
+
+==============================
+Experiment 20/20
+
+>>> Setting up environment for: sshBruteforce
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model weights loaded successfully.
+Data Loaded: 38 Benign samples, 92 Malicious samples.
+Running Inference (Energy-Based OOD)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Threshold Used: -3.0
+------------------------------
+Accuracy:       0.2923
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.0000
+------------------------------
+Confusion Matrix:
+[[38  0]
+ [92  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 38
+FP (False Alarms):   0
+FN (Missed Attacks): 92
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.29      1.00      0.45        38
+   Malicious       0.00      0.00      0.00        92
+
+    accuracy                           0.29       130
+   macro avg       0.15      0.50      0.23       130
+weighted avg       0.09      0.29      0.13       130
+
+==============================
+
+Batch Benchmark Completed.

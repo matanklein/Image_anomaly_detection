@@ -1,0 +1,959 @@
+ML Virtual Environment Helper
+==============================
+Virtual environment location: /mnt/exdisk1/matan/ml_env
+
+Warning: virtualenv is on a noexec mount; using local executable clone: /home/matan/.ml_env_exec/bin/python
+STARTING BATCH BENCHMARK MODE
+========================================
+Experiment 1/21
+
+>>> Setting up environment for: bot1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 0 Benign samples, 0 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       nan
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          N/A (Only one class in dataset)
+------------------------------
+Confusion Matrix:
+[]
+------------------------------
+Full Classification Report:
+Error in testing: Number of classes, 0, does not match size of target_names, 2. Try specifying the labels parameter
+Experiment 2/21
+
+>>> Setting up environment for: bot2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 2 Benign samples, 91 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8519, std=0.0108
+Malicious Distance: mean=52.2127, std=0.3940
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.9892
+Precision:      0.9891
+Recall:         1.0000
+F1 Score:       0.9945
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[ 1  1]
+ [ 0 91]]
+
+TP (Attacks Caught): 91
+TN (Benign Allowed): 1
+FP (False Alarms):   1
+FN (Missed Attacks): 0
+FPR: 0.5000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      0.50      0.67         2
+   Malicious       0.99      1.00      0.99        91
+
+    accuracy                           0.99        93
+   macro avg       0.99      0.75      0.83        93
+weighted avg       0.99      0.99      0.99        93
+
+==============================
+Experiment 3/21
+
+>>> Setting up environment for: bruteforceWeb1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 22 Benign samples, 71 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8387, std=0.0003
+Malicious Distance: mean=51.8430, std=0.0011
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.2366
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.9949
+------------------------------
+Confusion Matrix:
+[[22  0]
+ [71  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 22
+FP (False Alarms):   0
+FN (Missed Attacks): 71
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.24      1.00      0.38        22
+   Malicious       0.00      0.00      0.00        71
+
+    accuracy                           0.24        93
+   macro avg       0.12      0.50      0.19        93
+weighted avg       0.06      0.24      0.09        93
+
+==============================
+Experiment 4/21
+
+>>> Setting up environment for: bruteforceWeb2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 21 Benign samples, 60 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8387, std=0.0002
+Malicious Distance: mean=51.8431, std=0.0008
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.2593
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.9984
+------------------------------
+Confusion Matrix:
+[[21  0]
+ [60  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 21
+FP (False Alarms):   0
+FN (Missed Attacks): 60
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.26      1.00      0.41        21
+   Malicious       0.00      0.00      0.00        60
+
+    accuracy                           0.26        81
+   macro avg       0.13      0.50      0.21        81
+weighted avg       0.07      0.26      0.11        81
+
+==============================
+Experiment 5/21
+
+>>> Setting up environment for: bruteforceXSS1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 26 Benign samples, 39 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8387, std=0.0001
+Malicious Distance: mean=51.8417, std=0.0005
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.4000
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[26  0]
+ [39  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 26
+FP (False Alarms):   0
+FN (Missed Attacks): 39
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.40      1.00      0.57        26
+   Malicious       0.00      0.00      0.00        39
+
+    accuracy                           0.40        65
+   macro avg       0.20      0.50      0.29        65
+weighted avg       0.16      0.40      0.23        65
+
+==============================
+Experiment 6/21
+
+>>> Setting up environment for: bruteforceXSS2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 28 Benign samples, 71 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8400, std=0.0001
+Malicious Distance: mean=51.8431, std=0.0005
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.2828
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[28  0]
+ [71  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 28
+FP (False Alarms):   0
+FN (Missed Attacks): 71
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.28      1.00      0.44        28
+   Malicious       0.00      0.00      0.00        71
+
+    accuracy                           0.28        99
+   macro avg       0.14      0.50      0.22        99
+weighted avg       0.08      0.28      0.12        99
+
+==============================
+Experiment 7/21
+
+>>> Setting up environment for: ddosHoic
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 12 Benign samples, 56 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8389, std=0.0002
+Malicious Distance: mean=68.7747, std=5.7274
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.9853
+Precision:      1.0000
+Recall:         0.9821
+F1 Score:       0.9910
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[12  0]
+ [ 1 55]]
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/.ml_env_exec/lib/python3.8/site-packages/numpy/lib/function_base.py:518: RuntimeWarning: Mean of empty slice.
+  avg = a.mean(axis, **keepdims_kw)
+/home/matan/.ml_env_exec/lib/python3.8/site-packages/numpy/core/_methods.py:192: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+
+TP (Attacks Caught): 55
+TN (Benign Allowed): 12
+FP (False Alarms):   0
+FN (Missed Attacks): 1
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.92      1.00      0.96        12
+   Malicious       1.00      0.98      0.99        56
+
+    accuracy                           0.99        68
+   macro avg       0.96      0.99      0.98        68
+weighted avg       0.99      0.99      0.99        68
+
+==============================
+Experiment 8/21
+
+>>> Setting up environment for: ddosLoicHttp
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 29 Benign samples, 64 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8385, std=0.0002
+Malicious Distance: mean=56.2891, std=0.5599
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[29  0]
+ [ 0 64]]
+
+TP (Attacks Caught): 64
+TN (Benign Allowed): 29
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00        29
+   Malicious       1.00      1.00      1.00        64
+
+    accuracy                           1.00        93
+   macro avg       1.00      1.00      1.00        93
+weighted avg       1.00      1.00      1.00        93
+
+==============================
+Experiment 9/21
+
+>>> Setting up environment for: ddosLoicUdp1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 2 Benign samples, 16 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8385, std=0.0000
+Malicious Distance: mean=51.9191, std=0.0163
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[ 2  0]
+ [ 0 16]]
+
+TP (Attacks Caught): 16
+TN (Benign Allowed): 2
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00         2
+   Malicious       1.00      1.00      1.00        16
+
+    accuracy                           1.00        18
+   macro avg       1.00      1.00      1.00        18
+weighted avg       1.00      1.00      1.00        18
+
+==============================
+Experiment 10/21
+
+>>> Setting up environment for: dosGoldeneye
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 57 Benign samples, 20 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8386, std=0.0003
+Malicious Distance: mean=52.8702, std=0.6286
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.9610
+Precision:      1.0000
+Recall:         0.8500
+F1 Score:       0.9189
+AUROC:          0.9452
+------------------------------
+Confusion Matrix:
+[[57  0]
+ [ 3 17]]
+
+TP (Attacks Caught): 17
+TN (Benign Allowed): 57
+FP (False Alarms):   0
+FN (Missed Attacks): 3
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.95      1.00      0.97        57
+   Malicious       1.00      0.85      0.92        20
+
+    accuracy                           0.96        77
+   macro avg       0.97      0.93      0.95        77
+weighted avg       0.96      0.96      0.96        77
+
+==============================
+Experiment 11/21
+
+>>> Setting up environment for: dosHulk
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 14 Benign samples, 14 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8386, std=0.0002
+Malicious Distance: mean=103.9474, std=9.4751
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[14  0]
+ [ 0 14]]
+
+TP (Attacks Caught): 14
+TN (Benign Allowed): 14
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00        14
+   Malicious       1.00      1.00      1.00        14
+
+    accuracy                           1.00        28
+   macro avg       1.00      1.00      1.00        28
+weighted avg       1.00      1.00      1.00        28
+
+==============================
+Experiment 12/21
+
+>>> Setting up environment for: dosSlowhttptest
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 28 Benign samples, 54 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8386, std=0.0002
+Malicious Distance: mean=52.1545, std=0.0434
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.9878
+Precision:      1.0000
+Recall:         0.9815
+F1 Score:       0.9907
+AUROC:          0.9993
+------------------------------
+Confusion Matrix:
+[[28  0]
+ [ 1 53]]
+
+TP (Attacks Caught): 53
+TN (Benign Allowed): 28
+FP (False Alarms):   0
+FN (Missed Attacks): 1
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.97      1.00      0.98        28
+   Malicious       1.00      0.98      0.99        54
+
+    accuracy                           0.99        82
+   macro avg       0.98      0.99      0.99        82
+weighted avg       0.99      0.99      0.99        82
+
+==============================
+Experiment 13/21
+
+>>> Setting up environment for: dosSlowloris
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 37 Benign samples, 42 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8385, std=0.0002
+Malicious Distance: mean=51.8797, std=0.0135
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[37  0]
+ [ 0 42]]
+
+TP (Attacks Caught): 42
+TN (Benign Allowed): 37
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00        37
+   Malicious       1.00      1.00      1.00        42
+
+    accuracy                           1.00        79
+   macro avg       1.00      1.00      1.00        79
+weighted avg       1.00      1.00      1.00        79
+
+==============================
+Experiment 14/21
+
+>>> Setting up environment for: ftpBruteforce
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 35 Benign samples, 98 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8398, std=0.0001
+Malicious Distance: mean=52.1575, std=0.0318
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[35  0]
+ [ 0 98]]
+
+TP (Attacks Caught): 98
+TN (Benign Allowed): 35
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00        35
+   Malicious       1.00      1.00      1.00        98
+
+    accuracy                           1.00       133
+   macro avg       1.00      1.00      1.00       133
+weighted avg       1.00      1.00      1.00       133
+
+==============================
+Experiment 15/21
+
+>>> Setting up environment for: Infiltration1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 35 Benign samples, 47 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8651, std=0.0547
+Malicious Distance: mean=51.9993, std=0.0975
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.8659
+Precision:      0.8750
+Recall:         0.8936
+F1 Score:       0.8842
+AUROC:          0.8960
+------------------------------
+Confusion Matrix:
+[[29  6]
+ [ 5 42]]
+
+TP (Attacks Caught): 42
+TN (Benign Allowed): 29
+FP (False Alarms):   6
+FN (Missed Attacks): 5
+FPR: 0.1714
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.85      0.83      0.84        35
+   Malicious       0.88      0.89      0.88        47
+
+    accuracy                           0.87        82
+   macro avg       0.86      0.86      0.86        82
+weighted avg       0.87      0.87      0.87        82
+
+==============================
+Experiment 16/21
+
+>>> Setting up environment for: Infiltration2
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 20 Benign samples, 37 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8631, std=0.0443
+Malicious Distance: mean=51.9849, std=0.0745
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.8421
+Precision:      0.8889
+Recall:         0.8649
+F1 Score:       0.8767
+AUROC:          0.8797
+------------------------------
+Confusion Matrix:
+[[16  4]
+ [ 5 32]]
+
+TP (Attacks Caught): 32
+TN (Benign Allowed): 16
+FP (False Alarms):   4
+FN (Missed Attacks): 5
+FPR: 0.2000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.76      0.80      0.78        20
+   Malicious       0.89      0.86      0.88        37
+
+    accuracy                           0.84        57
+   macro avg       0.83      0.83      0.83        57
+weighted avg       0.84      0.84      0.84        57
+
+==============================
+Experiment 17/21
+
+>>> Setting up environment for: Infiltration3
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 5 Benign samples, 34 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8388, std=0.0007
+Malicious Distance: mean=51.9731, std=0.1490
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.6667
+Precision:      1.0000
+Recall:         0.6176
+F1 Score:       0.7636
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[ 5  0]
+ [13 21]]
+
+TP (Attacks Caught): 21
+TN (Benign Allowed): 5
+FP (False Alarms):   0
+FN (Missed Attacks): 13
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.28      1.00      0.43         5
+   Malicious       1.00      0.62      0.76        34
+
+    accuracy                           0.67        39
+   macro avg       0.64      0.81      0.60        39
+weighted avg       0.91      0.67      0.72        39
+
+==============================
+Experiment 18/21
+
+>>> Setting up environment for: Infiltration4
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 0 Benign samples, 99 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Malicious Distance: mean=51.8925, std=0.0865
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.3030
+Precision:      1.0000
+Recall:         0.3030
+F1 Score:       0.4651
+AUROC:          N/A (Only one class in dataset)
+------------------------------
+Confusion Matrix:
+[[ 0  0]
+ [69 30]]
+
+TP (Attacks Caught): 30
+TN (Benign Allowed): 0
+FP (False Alarms):   0
+FN (Missed Attacks): 69
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.00      0.00      0.00         0
+   Malicious       1.00      0.30      0.47        99
+
+    accuracy                           0.30        99
+   macro avg       0.50      0.15      0.23        99
+weighted avg       1.00      0.30      0.47        99
+
+==============================
+Experiment 19/21
+
+>>> Setting up environment for: sqlInjection1
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 29 Benign samples, 11 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8387, std=0.0001
+Malicious Distance: mean=51.8390, std=0.0003
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.7250
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.9295
+------------------------------
+Confusion Matrix:
+[[29  0]
+ [11  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 29
+FP (False Alarms):   0
+FN (Missed Attacks): 11
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.72      1.00      0.84        29
+   Malicious       0.00      0.00      0.00        11
+
+    accuracy                           0.73        40
+   macro avg       0.36      0.50      0.42        40
+weighted avg       0.53      0.72      0.61        40
+
+==============================
+Experiment 20/21
+
+>>> Setting up environment for: sqlInjection2
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+/home/matan/Image_anomaly_detection/src/Deep_SVDD/test.py:33: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config.MODEL_DIR, map_location=device)
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 30 Benign samples, 10 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8387, std=0.0001
+Malicious Distance: mean=51.8390, std=0.0001
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       0.7500
+Precision:      0.0000
+Recall:         0.0000
+F1 Score:       0.0000
+AUROC:          0.9750
+------------------------------
+Confusion Matrix:
+[[30  0]
+ [10  0]]
+
+TP (Attacks Caught): 0
+TN (Benign Allowed): 30
+FP (False Alarms):   0
+FN (Missed Attacks): 10
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       0.75      1.00      0.86        30
+   Malicious       0.00      0.00      0.00        10
+
+    accuracy                           0.75        40
+   macro avg       0.38      0.50      0.43        40
+weighted avg       0.56      0.75      0.64        40
+
+==============================
+Experiment 21/21
+
+>>> Setting up environment for: sshBruteforce
+   [1/2] Skipping Preprocessing (images must already exist)...
+   [2/2] Running Evaluation...
+--- Testing Model on cuda ---
+Model checkpoint and SVDD center loaded successfully.
+Data Loaded: 38 Benign samples, 92 Malicious samples.
+Running Inference (Deep SVDD Distance)...
+Benign Distance: mean=51.8398, std=0.0000
+Malicious Distance: mean=52.7343, std=0.1094
+
+==============================
+   FINAL EVALUATION RESULTS   
+==============================
+Energy Threshold Used: 51.853145599365234
+------------------------------
+Accuracy:       1.0000
+Precision:      1.0000
+Recall:         1.0000
+F1 Score:       1.0000
+AUROC:          1.0000
+------------------------------
+Confusion Matrix:
+[[38  0]
+ [ 0 92]]
+
+TP (Attacks Caught): 92
+TN (Benign Allowed): 38
+FP (False Alarms):   0
+FN (Missed Attacks): 0
+FPR: 0.0000
+------------------------------
+Full Classification Report:
+              precision    recall  f1-score   support
+
+      Benign       1.00      1.00      1.00        38
+   Malicious       1.00      1.00      1.00        92
+
+    accuracy                           1.00       130
+   macro avg       1.00      1.00      1.00       130
+weighted avg       1.00      1.00      1.00       130
+
+==============================
+
+Batch Benchmark Completed.

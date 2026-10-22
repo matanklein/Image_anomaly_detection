@@ -1,0 +1,117 @@
+ML Virtual Environment Helper
+==============================
+Virtual environment location: /mnt/exdisk1/matan/ml_env
+
+Warning: virtualenv is on a noexec mount; using local executable clone: /home/matan/.ml_env_exec/bin/python
+STARTING BATCH BENCHMARK MODE
+========================================
+Experiment 1/2
+
+>>> Setting up environment for: sqlInjection1
+   [1/2] Processing PCAP...
+--- Processing /mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/sql-injection-1-22_02_2018.csv ---
+CSV columns detected (9): ['\ufeff"ip.src"', 'ip.dst', 'ip.proto', 'frame.len', 'tcp.srcport', 'tcp.dstport', 'frame.time_epoch', 'udp.srcport', 'udp.dstport']
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329178_False.npy | flows=4 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329238_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329298_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329358_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329418_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329478_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329538_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329598_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329658_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329718_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329778_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329838_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329898_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519329958_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330018_False.npy | flows=13 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330078_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330138_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330198_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330258_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330318_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330378_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330438_True.npy | flows=15 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330498_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330558_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330618_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330678_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330738_True.npy | flows=8 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330798_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330858_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519330918_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519330978_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519331038_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331098_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331158_False.npy | flows=4 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/malicious/1519331218_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331278_False.npy | flows=14 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331338_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331398_False.npy | flows=16 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331458_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection1/benign/1519331518_False.npy | flows=6 | label=benign
+--- CSV processing summary ---
+Rows read:            1399
+Rows skipped (time):  0
+Rows skipped (tuple): 244
+Rows used:            1155
+Intervals saved:      40
+Output base dir:      /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors
+   [2/2] Skipping Test...
+Experiment 2/2
+
+>>> Setting up environment for: sqlInjection2
+   [1/2] Processing PCAP...
+--- Processing /mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/sql-injection-2-23_02_2018.csv ---
+CSV columns detected (9): ['\ufeff"ip.src"', 'ip.dst', 'ip.proto', 'frame.len', 'tcp.srcport', 'tcp.dstport', 'frame.time_epoch', 'udp.srcport', 'udp.dstport']
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411490_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411550_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411610_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411670_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411730_False.npy | flows=9 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411790_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411850_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411910_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519411970_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412030_False.npy | flows=14 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412090_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412150_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412210_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412270_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412330_False.npy | flows=14 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412390_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412450_False.npy | flows=9 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412510_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412570_False.npy | flows=13 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412630_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519412690_True.npy | flows=19 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519412750_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519412810_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519412870_True.npy | flows=19 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519412930_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519412990_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413050_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519413110_True.npy | flows=26 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519413170_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413230_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519413290_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519413350_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/malicious/1519413410_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413470_False.npy | flows=9 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413530_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413590_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413650_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413710_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413770_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/test/sqlInjection2/benign/1519413830_False.npy | flows=5 | label=benign
+--- CSV processing summary ---
+Rows read:            1499
+Rows skipped (time):  0
+Rows skipped (tuple): 250
+Rows used:            1249
+Intervals saved:      40
+Output base dir:      /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors
+   [2/2] Skipping Test...
+
+Batch Benchmark Completed.

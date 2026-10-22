@@ -1,0 +1,97 @@
+ML Virtual Environment Helper
+==============================
+Virtual environment location: /mnt/exdisk1/matan/ml_env
+
+Warning: virtualenv is on a noexec mount; using fallback Python: /usr/bin/python3
+Step 1: Ensuring required folders exist...
+Step 2: Processing flows and converting to image tensors...
+--- Processing /mnt/exdisk1/matan/Datasets/CSE-CIC-IDS2018/CSV/bruteforce-web-2-23_02_2018.csv ---
+CSV columns detected (9): ['\ufeff"ip.src"', 'ip.dst', 'ip.proto', 'frame.len', 'tcp.srcport', 'tcp.dstport', 'frame.time_epoch', 'udp.srcport', 'udp.dstport']
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393592_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393652_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393712_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393772_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393832_False.npy | flows=11 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393892_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519393952_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394012_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394072_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394132_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394192_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394252_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394312_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394372_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394432_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394492_False.npy | flows=12 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519394552_False.npy | flows=6 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394612_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394672_True.npy | flows=10 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394732_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394792_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394852_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394912_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519394972_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395032_True.npy | flows=10 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395092_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395152_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395212_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395272_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395332_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395392_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395452_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395512_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395572_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395632_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395692_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395752_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395812_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395872_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395932_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519395992_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396052_True.npy | flows=20 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396112_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396172_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396232_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396292_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396352_True.npy | flows=23 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396412_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396472_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396532_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396592_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396652_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396712_True.npy | flows=19 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396772_True.npy | flows=15 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396832_True.npy | flows=20 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396892_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519396952_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397012_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397072_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397132_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397192_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397252_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397312_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397372_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397432_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397492_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397552_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397612_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397672_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397732_True.npy | flows=18 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397792_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397852_True.npy | flows=22 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397912_True.npy | flows=12 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519397972_True.npy | flows=10 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519398032_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519398092_True.npy | flows=14 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/malicious/1519398152_True.npy | flows=16 | label=malicious
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519398212_False.npy | flows=9 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519398272_False.npy | flows=8 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519398332_False.npy | flows=10 | label=benign
+Saved interval image: /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/train/benign/1519398392_False.npy | flows=17 | label=benign
+--- CSV processing summary ---
+Rows read:            18499
+Rows skipped (time):  0
+Rows skipped (tuple): 392
+Rows used:            18107
+Intervals saved:      81
+Output base dir:      /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors

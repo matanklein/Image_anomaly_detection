@@ -1,0 +1,15 @@
+ML Virtual Environment Helper
+==============================
+Virtual environment location: /mnt/exdisk1/matan/ml_env
+
+Warning: virtualenv is on a noexec mount; using local executable clone: /home/matan/.ml_env_exec/bin/python
+Step 1: Ensuring required folders exist...
+Step 2: Training model on benign traffic...
+--- Preparing Data for Training on cuda ---
+Benign Samples: 567
+OE/OOD Proxy Samples: 60
+Using balanced sampling (oversampling minority class).
+--- Starting Training (Pure Energy-Based OOD) ---
+Model saved to /mnt/exdisk1/matan/output/CSE-CIC-IDS2018/semi-supervised/tensors/model.pth
+Calibrated OOD Threshold (youden): -135.272194
+Energy stats | Benign mean=-136.8308, std=0.7081 | OE mean=-133.6997, std=0.2869
